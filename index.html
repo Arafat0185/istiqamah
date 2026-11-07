@@ -65,6 +65,13 @@ li.done .name{color:var(--muted)}
 .add input:focus{outline:0;border-color:var(--ice)}
 .edit{margin-top:28px;border:0;background:none;color:var(--muted);font:inherit;font-size:.85rem;letter-spacing:.04em;cursor:pointer;padding:6px 0}
 .edit:hover{color:var(--ice)}
+.rem{margin-top:26px}
+.remt{color:var(--muted);font-size:.82rem;letter-spacing:.03em;margin:0 0 10px}
+.times{display:flex;gap:10px;flex-wrap:wrap}
+.times input{font:inherit;font-size:.95rem;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:8px 2px;width:96px;color-scheme:dark}
+.rbtns{display:flex;gap:18px;margin-top:14px}
+.rbtns button{border:0;background:none;color:var(--ice);font:inherit;font-size:.88rem;cursor:pointer;padding:6px 0}
+.rs{color:var(--muted);font-size:.82rem;margin:8px 0 0;min-height:1.2em}
 [hidden]{display:none!important}
 button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}}
@@ -79,6 +86,7 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="bar" id="bar"><i id="pb"></i></div>
 <ul id="list"></ul>
 <div class="add" id="addw" hidden><input id="in" placeholder="Add a habit" aria-label="New habit" autocomplete="off" enterkeyhint="done"></div>
+<div class="rem" id="rem" hidden><p class="remt">Reminders</p><div class="times" id="times"></div><div class="rbtns"><button id="rtog"></button><button id="rtest" hidden>Send test</button></div><p class="rs" id="rs"></p></div>
 <button class="edit" id="edit">Edit habits</button>
 </main>
 <script>
@@ -107,7 +115,7 @@ var HKEY="habits-v2",LKEY="habitlog-v2";
 var habits=ld(HKEY,null),log=ld(LKEY,{}),editing=false,justDone=null;
 if(!habits)habits=DEFAULTS.map(function(a){return{id:a[0],name:a[1],g:a[2]}});
 function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
-function sv(){try{localStorage.setItem(HKEY,JSON.stringify(habits));localStorage.setItem(LKEY,JSON.stringify(log))}catch(e){}}
+function sv(){try{localStorage.setItem(HKEY,JSON.stringify(habits));localStorage.setItem(LKEY,JSON.stringify(log))}catch(e){}mirror()}
 function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
 function done(k,id){return(log[k]||[]).indexOf(id)>-1}
 function streak(id){var d=new Date(),n=0;if(!done(key(d),id))d.setDate(d.getDate()-1);while(done(key(d),id)){n++;d.setDate(d.getDate()-1)}return n}
@@ -144,12 +152,40 @@ var best=0;habits.forEach(function(h){best=Math.max(best,streak(h.id))});
 document.getElementById("ps").textContent=best?"Best streak "+best:"";
 document.getElementById("pb").style.width=(tot?c/tot*100:0)+"%";
 document.getElementById("bar").className="bar"+(tot&&c===tot?" full":"");
-document.getElementById("addw").hidden=!editing;
+document.getElementById("addw").hidden=!editing;document.getElementById("rem").hidden=!editing;
 document.getElementById("edit").textContent=editing?"Done":"Edit habits";
 }
 function add(){var i=document.getElementById("in"),v=i.value.trim();if(!v)return;habits.push({id:"h"+Date.now(),name:v,g:"Yours"});i.value="";sv();render();i.focus()}
 document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
 document.getElementById("edit").onclick=function(){editing=!editing;render()};
+var API="PUT_YOUR_WORKER_URL_HERE",RKEY="rem-v1";
+var rem=ld(RKEY,{on:false,times:["06:30","13:00","21:00"]});
+function mirror(){try{var r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put({habits:habits,log:log},"state")}catch(e){}}}catch(e){}}
+function rsay(t){document.getElementById("rs").textContent=t}
+function u8(s){var p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+function post(path,body){return fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})}
+function saveRem(){try{localStorage.setItem(RKEY,JSON.stringify(rem))}catch(e){}}
+async function getSub(){var reg=await navigator.serviceWorker.ready;return reg.pushManager.getSubscription()}
+async function syncRem(){var s=await getSub();if(s)await post("/subscribe",{sub:s.toJSON(),times:rem.times,tz:Intl.DateTimeFormat().resolvedOptions().timeZone})}
+async function turnOn(){
+if(API.indexOf("PUT_YOUR")>-1){rsay("Add your Worker URL to index.html first.");return}
+if(!("PushManager" in window)){rsay("Open the app from its Home Screen icon first (Share, Add to Home Screen).");return}
+try{var perm=await Notification.requestPermission();
+if(perm!=="granted"){rsay("Notifications are blocked. Allow them in iPhone Settings.");return}
+var reg=await navigator.serviceWorker.ready,key=await(await fetch(API+"/key")).text();
+var s=await reg.pushManager.getSubscription()||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(key.trim())});
+rem.on=true;saveRem();await syncRem();rsay("Reminders are on.")}catch(e){rsay("Could not turn on reminders: "+e.message)}
+drawRem()}
+async function turnOff(){try{var s=await getSub();if(s){await post("/unsubscribe",{sub:s.toJSON()});await s.unsubscribe()}}catch(e){}rem.on=false;saveRem();rsay("Reminders are off.");drawRem()}
+function drawRem(){var t=document.getElementById("times");t.innerHTML="";
+rem.times.forEach(function(v,i){var inp=document.createElement("input");inp.type="time";inp.value=v;inp.setAttribute("aria-label","Reminder time "+(i+1));
+inp.onchange=function(){rem.times[i]=inp.value||v;saveRem();if(rem.on)syncRem().then(function(){rsay("Times saved.")}).catch(function(){})};t.appendChild(inp)});
+document.getElementById("rtog").textContent=rem.on?"Turn off reminders":"Turn on reminders";
+document.getElementById("rtest").hidden=!rem.on}
+document.getElementById("rtog").onclick=function(){rem.on?turnOff():turnOn()};
+document.getElementById("rtest").onclick=async function(){try{var s=await getSub();var r=await post("/test",{sub:s.toJSON()});rsay("Test sent (status "+(await r.text())+"). It should arrive in a few seconds.")}catch(e){rsay("Test failed.")}};
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
+drawRem();mirror();
 render();
 </script>
 </body>
