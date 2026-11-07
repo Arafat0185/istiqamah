@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0d11">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Istiqamah">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Istiqamah</title>
+<style>
+:root{--bg:#0a0d11;--ink:#e4ebf2;--muted:#5d6b78;--line:#1a222b;--ice:#a9d3f0;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 18px/1.45 "Helvetica Neue",Helvetica,"Segoe UI",system-ui,sans-serif;min-height:100vh}
+main{max-width:480px;margin:0 auto;padding:56px 24px 80px}
+.date{color:var(--muted);font-size:.85rem;letter-spacing:.04em;margin:0 0 6px}
+h1{font-weight:200;font-size:2.6rem;letter-spacing:-.03em;margin:0 0 28px}
+.brand{display:flex;align-items:center;gap:14px;margin:0 0 28px}
+.brand h1{margin:0}
+.brand svg{width:38px;height:34px;flex:none}
+.quote{margin:0 0 34px;padding-left:16px;border-left:1px solid var(--ice)}
+.quote p{margin:0;font-size:1.05rem;line-height:1.55}
+.quote small{display:block;margin-top:8px;color:var(--muted);font-size:.8rem}
+.prog{display:flex;justify-content:space-between;color:var(--ice);font-size:.9rem;margin-bottom:10px}
+.bar{height:2px;background:var(--line);margin-bottom:8px;transition:box-shadow .5s}
+.bar i{display:block;height:100%;width:0;background:var(--ice);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar.full{box-shadow:0 0 14px rgba(169,211,240,.7)}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+li.grp{display:block;border:0;padding:26px 0 4px;color:var(--muted);font-size:.82rem;letter-spacing:.03em}
+.box{position:relative;width:24px;height:24px;flex:none;border:1px solid var(--muted);border-radius:50%;background:none;cursor:pointer;padding:0;display:grid;place-items:center;transition:background .25s,border-color .25s}
+.box:hover{border-color:var(--ice)}
+li.done .box{background:var(--ice);border-color:var(--ice)}
+.box svg{width:12px;height:12px;fill:none;stroke:var(--bg);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14}
+li.done .box svg{stroke-dashoffset:0}
+.box::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--ice);opacity:0;pointer-events:none}
+li.pop .box{animation:pop .5s cubic-bezier(.3,1.7,.5,1)}
+li.pop .box svg{animation:draw .35s .1s ease-out backwards}
+li.pop .box::after{animation:ring .7s ease-out}
+li.pop .name{animation:fade .5s ease-out}
+.p{position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:var(--ice);pointer-events:none;animation:fly .65s ease-out forwards}
+@keyframes pop{0%{transform:scale(.7)}55%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes draw{from{stroke-dashoffset:14}}
+@keyframes ring{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
+@keyframes fly{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--x),var(--y)) scale(.3);opacity:0}}
+@keyframes fade{from{color:var(--ice)}}
+.txt{flex:1;min-width:0}
+.name{display:block;overflow-wrap:anywhere;transition:color .3s}
+li.done .name{color:var(--muted)}
+.meta{display:flex;align-items:center;gap:10px;margin-top:5px;font-size:.78rem;color:var(--muted)}
+.dots{display:flex;gap:4px}
+.dots b{width:6px;height:6px;border-radius:50%;border:1px solid var(--muted)}
+.dots b.on{background:var(--ice);border-color:var(--ice)}
+.del{border:0;background:none;color:var(--muted);font:inherit;font-size:1.2rem;cursor:pointer;padding:2px 6px}
+.del:hover{color:var(--ice)}
+.add{margin-top:18px}
+.add input{width:100%;font:inherit;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:12px 0;border-radius:0}
+.add input::placeholder{color:var(--muted)}
+.add input:focus{outline:0;border-color:var(--ice)}
+.edit{margin-top:28px;border:0;background:none;color:var(--muted);font:inherit;font-size:.85rem;letter-spacing:.04em;cursor:pointer;padding:6px 0}
+.edit:hover{color:var(--ice)}
+[hidden]{display:none!important}
+button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<p class="date" id="date"></p>
+<div class="brand"><svg viewBox="0 0 40 36" aria-hidden="true"><path d="M2 32H13V20H24V8H35" fill="none" stroke="#a9d3f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="8" r="3" fill="#a9d3f0"/></svg><h1>Istiqamah</h1></div>
+<blockquote class="quote"><p id="qt"></p><small id="qs"></small></blockquote>
+<div class="prog"><span id="pt"></span><span id="ps"></span></div>
+<div class="bar" id="bar"><i id="pb"></i></div>
+<ul id="list"></ul>
+<div class="add" id="addw" hidden><input id="in" placeholder="Add a habit" aria-label="New habit" autocomplete="off" enterkeyhint="done"></div>
+<button class="edit" id="edit">Edit habits</button>
+</main>
+<script>
+var QUOTES=[
+["The most beloved deeds to Allah are the consistent ones, even if small.","Sahih al-Bukhari & Muslim"],
+["Indeed, with hardship comes ease.","Qur’an 94:6"],
+["Verily, in the remembrance of Allah do hearts find rest.","Qur’an 13:28"],
+["Remember Me, and I will remember you.","Qur’an 2:152"],
+["Whoever walks a path seeking knowledge, Allah makes easy for him a path to Paradise.","Sahih Muslim"],
+["Allah does not burden a soul beyond what it can bear.","Qur’an 2:286"],
+["Those who strive for Us, We will surely guide them to Our ways.","Qur’an 29:69"],
+["The best of you are those who learn the Qur’an and teach it.","Sahih al-Bukhari"],
+["And whoever relies upon Allah, He is sufficient for them.","Qur’an 65:3"],
+["My Lord, increase me in knowledge.","Qur’an 20:114"],
+["Do not despair of the mercy of Allah.","Qur’an 39:53"],
+["Do not lose heart and do not grieve.","Qur’an 3:139"],
+["Two blessings many people lose: health and free time.","Sahih al-Bukhari"]
+];
+var DEFAULTS=[
+["fajr","Fajr","Salah"],["dhuhr","Dhuhr","Salah"],["asr","Asr","Salah"],["maghrib","Maghrib","Salah"],["isha","Isha","Salah"],
+["tahajjud","Tahajjud","Night & Duha"],["duha","Duha","Night & Duha"],["witr","Witr","Night & Duha"],
+["morning","Morning adhkaar","Remembrance"],["evening","Evening adhkaar","Remembrance"],["istighfar","Istighfar (100x)","Remembrance"],["sleep","Sleep adhkaar & Surah Mulk","Remembrance"],
+["quran","Daily Qur’an","Growth"],["ilm","Daily ilm","Growth"],["sadaqah","Sadaqah","Growth"]
+];
+var HKEY="habits-v2",LKEY="habitlog-v2";
+var habits=ld(HKEY,null),log=ld(LKEY,{}),editing=false,justDone=null;
+if(!habits)habits=DEFAULTS.map(function(a){return{id:a[0],name:a[1],g:a[2]}});
+function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+function sv(){try{localStorage.setItem(HKEY,JSON.stringify(habits));localStorage.setItem(LKEY,JSON.stringify(log))}catch(e){}}
+function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function done(k,id){return(log[k]||[]).indexOf(id)>-1}
+function streak(id){var d=new Date(),n=0;if(!done(key(d),id))d.setDate(d.getDate()-1);while(done(key(d),id)){n++;d.setDate(d.getDate()-1)}return n}
+function toggle(id){var k=key(new Date()),a=log[k]||[],i=a.indexOf(id);
+if(i>-1)a.splice(i,1);else{a.push(id);justDone=id;try{if(navigator.vibrate)navigator.vibrate(14)}catch(e){}}
+log[k]=a;sv();render()}
+var now=new Date();
+document.getElementById("date").textContent=now.toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"});
+var q=QUOTES[Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate())/864e5)%QUOTES.length];
+document.getElementById("qt").textContent=q[0];document.getElementById("qs").textContent=q[1];
+function burst(box){for(var i=0;i<9;i++){var a=i/9*Math.PI*2,r=24+(i%2)*8,p=document.createElement("span");p.className="p";p.style.setProperty("--x",Math.cos(a)*r+"px");p.style.setProperty("--y",Math.sin(a)*r+"px");box.appendChild(p)}}
+function render(){
+var l=document.getElementById("list");l.innerHTML="";var today=key(new Date()),last=null;
+habits.forEach(function(h,i){
+var g=h.g||"Yours";
+if(g!==last){var gh=document.createElement("li");gh.className="grp";gh.textContent=g;l.appendChild(gh);last=g}
+var li=document.createElement("li"),dn=done(today,h.id);if(dn)li.className="done";
+var b=document.createElement("button");b.className="box";b.setAttribute("aria-label",(dn?"Unmark ":"Mark ")+h.name);
+b.innerHTML='<svg viewBox="0 0 12 12"><path d="M2 6.5l2.6 2.6L10 3.4"/></svg>';b.onclick=function(){toggle(h.id)};
+if(justDone===h.id){li.className+=" pop";burst(b)}
+var t=document.createElement("div");t.className="txt";
+var n=document.createElement("span");n.className="name";n.textContent=h.name;
+var m=document.createElement("div");m.className="meta";
+var dots=document.createElement("div");dots.className="dots";
+for(var j=6;j>=0;j--){var d=new Date();d.setDate(d.getDate()-j);var s=document.createElement("b");if(done(key(d),h.id))s.className="on";dots.appendChild(s)}
+var st=streak(h.id),sp=document.createElement("span");sp.textContent=st?st+(st===1?" day":" days"):"";
+m.append(dots,sp);t.append(n,m);li.append(b,t);
+if(editing){var x=document.createElement("button");x.className="del";x.textContent="×";x.setAttribute("aria-label","Delete "+h.name);x.onclick=function(){habits.splice(i,1);sv();render()};li.appendChild(x)}
+l.appendChild(li)});
+justDone=null;
+var c=habits.filter(function(h){return done(today,h.id)}).length,tot=habits.length;
+document.getElementById("pt").textContent=tot?(c===tot?"All done today, mashaAllah":c+" of "+tot+" today"):"No habits yet";
+var best=0;habits.forEach(function(h){best=Math.max(best,streak(h.id))});
+document.getElementById("ps").textContent=best?"Best streak "+best:"";
+document.getElementById("pb").style.width=(tot?c/tot*100:0)+"%";
+document.getElementById("bar").className="bar"+(tot&&c===tot?" full":"");
+document.getElementById("addw").hidden=!editing;
+document.getElementById("edit").textContent=editing?"Done":"Edit habits";
+}
+function add(){var i=document.getElementById("in"),v=i.value.trim();if(!v)return;habits.push({id:"h"+Date.now(),name:v,g:"Yours"});i.value="";sv();render();i.focus()}
+document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
+document.getElementById("edit").onclick=function(){editing=!editing;render()};
+render();
+</script>
+</body>
+</html>
