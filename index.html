@@ -324,7 +324,7 @@ document.getElementById("edit").textContent=editing?"Done":"Edit habits";
 function add(){var i=document.getElementById("in"),v=i.value.trim();if(!v)return;habits.push({id:"h"+Date.now(),name:v,g:"Yours"});i.value="";sv();render();i.focus()}
 document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
 document.getElementById("edit").onclick=function(){editing=!editing;render()};
-var API=window.WORKER_URL||"PUT_YOUR_WORKER_URL_HERE",RKEY="rem-v2";
+var API=(window.WORKER_URL||"PUT_YOUR_WORKER_URL_HERE").trim().replace(/\/+$/,""),RKEY="rem-v2";
 var rem=ld(RKEY,{on:false,times:["08:30","13:30","17:30"]});
 function mirror(){try{var r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put({habits:habits,log:log},"state")}catch(e){}}}catch(e){}}
 function rsay(t){document.getElementById("rs").textContent=t}
@@ -356,7 +356,7 @@ L.push("Home Screen app: "+((navigator.standalone||(window.matchMedia&&matchMedi
 L.push("Notifications: "+("Notification" in window?Notification.permission:"not available here"));
 if(API.indexOf("PUT_YOUR")>-1)L.push("Worker address: missing, edit config.js");else{L.push("Worker address: set");
 try{var r=await fetch(API+"/health"),t=await r.text(),j=null;try{j=JSON.parse(t)}catch(e){}
-if(!j)L.push("Worker: reachable but old, please paste the new worker.js");else{L.push("Worker: reachable, "+j.subs+" device(s) subscribed");L.push("Timer last ran: "+(j.cron?new Date(j.cron).toLocaleString():"never, add the cron trigger"));L.push("Last send: "+(j.last?j.last.sent+" sent, replies "+j.last.codes.join(",")+" at "+new Date(j.last.t).toLocaleTimeString():"none yet"))}}catch(e){L.push("Worker: unreachable, check the address")}}
+if(!j)L.push("Worker replied: "+t.slice(0,70).replace(/\s+/g," ")+(/Istiqamah push/.test(t)?" (old code, or a different Worker from the one you edited)":""));else{L.push("Worker: reachable, "+j.subs+" device(s) subscribed");L.push("Timer last ran: "+(j.cron?new Date(j.cron).toLocaleString():"never, add the cron trigger"));L.push("Last send: "+(j.last?j.last.sent+" sent, replies "+j.last.codes.join(",")+" at "+new Date(j.last.t).toLocaleTimeString():"none yet"))}}catch(e){L.push("Worker: unreachable, check the address")}}
 try{L.push("This device subscribed: "+(await getSub()?"yes":"no"))}catch(e){L.push("This device subscribed: unknown")}
 rsay(L.join("\n"))};
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
@@ -509,7 +509,7 @@ document.getElementById("rdate").textContent=new Date().toLocaleDateString(undef
 window.rfRefresh=render;window.rfDot=dot;mir();render();
 })();</script>
 <script>(function(){
-var KEYS=["habits-v2","habitlog-v2","hifz-v3","reflect-v1","weekly-v1"],API=window.WORKER_URL||"",ok=API&&API.indexOf("PUT_YOUR")<0;
+var KEYS=["habits-v2","habitlog-v2","hifz-v3","reflect-v1","weekly-v1"],API=(window.WORKER_URL||"").trim().replace(/\/+$/,""),ok=API&&API.indexOf("PUT_YOUR")<0;
 function $(i){return document.getElementById(i)}
 function say(t){$("bs").textContent=t}
 function gi(k){try{return localStorage.getItem(k)}catch(e){return null}}
