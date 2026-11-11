@@ -171,6 +171,57 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 .nav button{flex:1;border:0;background:none;color:var(--muted);font:inherit;font-size:.72rem;letter-spacing:.05em;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0;transition:color .2s}
 .nav button.on{color:var(--ice)}
 .nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+#hz .cl{position:relative;overflow:hidden}
+#hz .cl i{position:absolute;left:0;right:0;bottom:0;background:#3b6f93}
+#hz .cl span{position:relative}
+#hz .cl.cur{outline:none;animation:none;box-shadow:0 0 0 1.5px #7fa6c4}
+#hz .rv{position:relative;overflow:hidden}
+#hz .fin{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(14,40,28,.95);animation:fo .25s ease-out;z-index:2}
+#hz .fin svg{width:64px;height:64px;overflow:visible}
+#hz .fin circle{fill:none;stroke:#5fbf92;stroke-width:3;stroke-dasharray:170;stroke-dashoffset:170;animation:dr .45s .05s ease-out forwards}
+#hz .fin path{fill:none;stroke:#d9f5e7;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:dr .3s .4s ease-out forwards}
+#hz .fin span{color:#d9f5e7;font-size:.9rem;opacity:0;animation:fo2 .3s .55s forwards}
+#hz .fin b{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-40px 0 0 -32px;border-radius:50%;border:2px solid #5fbf92;opacity:0;animation:rp .8s .3s ease-out forwards}
+#hz .fin i{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-10px 0 0 -2px;border-radius:50%;background:#5fbf92;opacity:0;animation:hfly .8s .35s ease-out forwards}
+#hz .rs i.pop{animation:sq .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes fo{from{opacity:0}}
+@keyframes fo2{to{opacity:1}}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes rp{from{transform:scale(1);opacity:.8}to{transform:scale(3.4);opacity:0}}
+@keyframes sq{0%{transform:scale(.4)}60%{transform:scale(1.7)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){#hz .fin circle,#hz .fin path{stroke-dashoffset:0}#hz .fin span{opacity:1}#hz .fin i,#hz .fin b{display:none}}
+#rem .rs{white-space:pre-line}
+.nav button{position:relative}
+.nav button.dot::after{content:"";position:absolute;top:3px;left:calc(50% + 9px);width:7px;height:7px;border-radius:50%;background:var(--green)}
+#rf h1{font-weight:200;font-size:2.4rem;letter-spacing:-.03em;margin:0 0 20px}
+#rf h2{font-weight:300;font-size:.8rem;color:var(--muted);letter-spacing:.06em;margin:28px 0 10px}
+#rf .qa{margin:0 0 18px}
+#rf label{display:block;font-size:.95rem;margin:0 0 7px}
+#rf textarea{width:100%;min-height:76px;resize:vertical;font:inherit;font-size:.95rem;line-height:1.5;color:var(--ink);background:#0d1217;border:1px solid var(--line);border-radius:12px;padding:12px;color-scheme:dark}
+#rf textarea:focus,#rf input:focus{outline:0;border-color:var(--ice)}
+#rf .b{border:1px solid var(--line);background:none;color:var(--ice);font:inherit;font-size:.9rem;padding:10px 18px;border-radius:999px;cursor:pointer;transition:transform .15s,background .3s}
+#rf .b.on{background:var(--ice);color:var(--bg);border-color:var(--ice)}
+#rf .b.ok{background:var(--green);border-color:var(--green);color:#0a0d11}
+#rf .b:active{transform:scale(.94)}
+#rf .row2{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+#rf .ent{border-bottom:1px solid var(--line);padding:14px 0;cursor:pointer}
+#rf .ent b{font-weight:300}
+#rf .ent small{display:block;color:var(--muted);font-size:.82rem;margin-top:3px;overflow-wrap:anywhere}
+#rf .ent .q{color:var(--muted);font-size:.78rem;margin:12px 0 2px}
+#rf .ent .a{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.92rem}
+#rf .qe{display:flex;gap:8px;align-items:center;margin:0 0 8px}
+#rf input.qi{flex:1;min-width:0;font:inherit;font-size:.95rem;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:8px 2px;border-radius:0}
+#rf .mut{color:var(--muted);font-size:.8rem;margin:10px 0}
+
+#hz textarea{width:100%;min-height:80px;resize:vertical;font:inherit;font-size:.95rem;line-height:1.5;color:var(--ink);background:#0d1217;border:1px solid var(--line);border-radius:12px;padding:12px;color-scheme:dark;margin-bottom:6px}
+#hz textarea:focus{outline:0;border-color:var(--ice)}
+#hz .wq{font-size:1.1rem;font-weight:300;margin:0 0 12px;line-height:1.4}
+#hz .wh{border-bottom:1px solid var(--line);padding:14px 0}
+#hz .wq2{color:var(--muted);font-size:.82rem;margin:6px 0 4px}
+#hz .wa2{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.92rem}
+#hz .b.ok{background:var(--green);border-color:var(--green);color:#0a0d11}
+.bta{width:100%;font:inherit;font-size:.85rem;color:var(--ink);background:#0d1217;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:10px;color-scheme:dark}
 </style>
 </head>
 <body>
@@ -183,7 +234,9 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="bar" id="bar"><i id="pb"></i></div>
 <ul id="list"></ul>
 <div class="add" id="addw" hidden><input id="in" placeholder="Add a habit" aria-label="New habit" autocomplete="off" enterkeyhint="done"></div>
-<div class="rem" id="rem" hidden><p class="remt">Reminders</p><div class="times" id="times"></div><div class="rbtns"><button id="rtog"></button><button id="rtest" hidden>Send test</button></div><p class="rs" id="rs"></p></div>
+<div class="rem" id="rem" hidden><p class="remt">Reminders</p><div class="times" id="times"></div><div class="rbtns"><button id="rtog"></button><button id="rtest" hidden>Send test</button><button id="rchk">Check</button></div><p class="rs" id="rs"></p>
+<p class="remt" style="margin-top:28px">Backup</p><div class="rbtns"><button id="bon">Turn on cloud backup</button><button id="bnow" hidden>Back up now</button><button id="bshow" hidden>Show my code</button><button id="bcopy">Copy backup</button></div><p class="rs" id="bs"></p>
+<textarea id="brest" class="bta" rows="2" placeholder="To restore, paste your sync code or a copied backup here"></textarea><div class="rbtns"><button id="brestore">Restore</button></div></div>
 <button class="edit" id="edit">Edit habits</button>
 </div>
 <div id="hz" hidden>
@@ -194,8 +247,13 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="sheet" id="sh" data-a="close" hidden></div>
 <div class="toast" id="toast" hidden></div>
 </div>
+<div id="rf" hidden>
+<p class="date" id="rdate"></p>
+<h1>Reflect</h1>
+<div id="rfv"></div>
+</div>
 </main>
-<nav class="nav" id="nav"><button data-t="habits" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>Habits</button><button data-t="hifz"><svg viewBox="0 0 24 24"><path d="M3.5 6c3-1.2 5.5-.8 8.5 1 3-1.8 5.5-2.2 8.5-1v12c-3-1.2-5.5-.8-8.5 1-3-1.8-5.5-2.2-8.5-1z"/><path d="M12 7v12"/></svg>Hifz</button></nav>
+<nav class="nav" id="nav"><button data-t="habits" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>Habits</button><button data-t="hifz"><svg viewBox="0 0 24 24"><path d="M3.5 6c3-1.2 5.5-.8 8.5 1 3-1.8 5.5-2.2 8.5-1v12c-3-1.2-5.5-.8-8.5 1-3-1.8-5.5-2.2-8.5-1z"/><path d="M12 7v12"/></svg>Hifz</button><button data-t="reflect"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Reflect</button></nav>
 <script src="config.js"></script>
 <script>(function(){
 var QUOTES=[
@@ -291,7 +349,16 @@ inp.onchange=function(){rem.times[i]=inp.value||v;saveRem();if(rem.on)syncRem().
 document.getElementById("rtog").textContent=rem.on?"Turn off reminders":"Turn on reminders";
 document.getElementById("rtest").hidden=!rem.on}
 document.getElementById("rtog").onclick=function(){rem.on?turnOff():turnOn()};
-document.getElementById("rtest").onclick=async function(){try{var s=await getSub();var r=await post("/test",{sub:s.toJSON()});rsay("Test sent (status "+(await r.text())+"). It should arrive in a few seconds.")}catch(e){rsay("Test failed.")}};
+document.getElementById("rtest").onclick=async function(){try{var s=await getSub();if(!s){rsay("Not subscribed yet. Tap Turn on reminders.");return}var r=await post("/test",{sub:s.toJSON()}),t=await r.text(),j={};try{j=JSON.parse(t)}catch(e){j={status:t}}
+rsay(j.status==201||j.status==200?"Test sent. It should arrive within a few seconds.":"Test failed. The push service replied "+j.status+(j.body?": "+j.body:"")+". Please tell me this message.")}catch(e){rsay("Test failed: "+e.message)}};
+document.getElementById("rchk").onclick=async function(){var L=[];
+L.push("Home Screen app: "+((navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches))?"yes":"no, open it from the Home Screen icon"));
+L.push("Notifications: "+("Notification" in window?Notification.permission:"not available here"));
+if(API.indexOf("PUT_YOUR")>-1)L.push("Worker address: missing, edit config.js");else{L.push("Worker address: set");
+try{var r=await fetch(API+"/health"),t=await r.text(),j=null;try{j=JSON.parse(t)}catch(e){}
+if(!j)L.push("Worker: reachable but old, please paste the new worker.js");else{L.push("Worker: reachable, "+j.subs+" device(s) subscribed");L.push("Timer last ran: "+(j.cron?new Date(j.cron).toLocaleString():"never, add the cron trigger"));L.push("Last send: "+(j.last?j.last.sent+" sent, replies "+j.last.codes.join(",")+" at "+new Date(j.last.t).toLocaleTimeString():"none yet"))}}catch(e){L.push("Worker: unreachable, check the address")}}
+try{L.push("This device subscribed: "+(await getSub()?"yes":"no"))}catch(e){L.push("This device subscribed: unknown")}
+rsay(L.join("\n"))};
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 drawRem();mirror();
 render();
@@ -320,7 +387,7 @@ function segM(o){return Math.max(0,Math.min(mem(o.sn),o.en)-o.st+1)}
 function revList(){var a=[];for(var s=114;s>=1;s--)if(s>=D.rb&&mem(s)>0)a.push(s);return a}
 function curRev(){var L=revList();if(!L.length)return 0;if(L.indexOf(D.rp)>-1)return D.rp;for(var i=0;i<L.length;i++)if(L[i]<=D.rp)return L[i];return L[0]}
 function streak(){var n=0,d=new Date();function on(){return(D.add[iso(d)]||0)>0}if(!on())d.setDate(d.getDate()-1);while(on()){n++;d.setDate(d.getDate()-1)}return n}
-function mirror(){try{var c=curRev(),o={d:TD,goal:D.goal,n:D.add[TD]||0,cur:D.cur?NAMES[D.cur-1]:"",nx:D.cur?mem(D.cur)+1:0,rv:c?NAMES[c-1]+" 1–"+mem(c):"",rd:D.rev[TD]||0,st:streak(),why:D.why||""},r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put(o,"hifz")}catch(e){}}}catch(e){}}
+function mirror(){try{var c=curRev(),o={d:TD,goal:D.goal,n:D.add[TD]||0,cur:D.cur?NAMES[D.cur-1]:"",nx:D.cur?mem(D.cur)+1:0,rv:c?NAMES[c-1]+" 1–"+mem(c):"",rd:D.rev[TD]||0,st:streak(),why:wAns().slice(0,120),wk:WK,wq:wq(),wqn:wqAt(mon(new Date(Date.now()+7*864e5))),wd:wAns()?1:0},r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put(o,"hifz")}catch(e){}}}catch(e){}}
 function save(){try{localStorage.setItem("hifz-v3",JSON.stringify(D))}catch(e){}mirror()}
 function seed(){D.mem={1:7,2:252};for(var s=39;s<=114;s++)D.mem[s]=CNT[s-1];D.mem[38]=61;D.cur=38;D.rp=114;D.rr=1;D.rb=38;D.init=1;save()}
 function tick(){try{var h=JSON.parse(localStorage.getItem("habitlog-v2")||"{}"),d=new Date(),k=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),a=h[k]||[];if(a.indexOf("quran")<0){a.push("quran");h[k]=a;localStorage.setItem("habitlog-v2",JSON.stringify(h))}}catch(e){}}
@@ -331,36 +398,44 @@ function undo(){var l=D.adds[D.adds.length-1];if(!l||l.d!==TD)return;D.adds.pop(
 function setMem(s,v){D.mem[s]=v;if(s==D.rb-1&&v>0)D.rb=s;save()}
 function revDone(){var L=revList(),c=curRev();if(!c)return 0;D.rev[TD]=(D.rev[TD]||0)+1;var i=L.indexOf(c),w=i+1>=L.length;D.rp=w?L[0]:L[i+1];if(w)D.rr++;tick();save();return w}
 function dk(){var k={};SEG.forEach(function(o){if(segM(o)==o.tot)k["s"+o.k]=1});NJ.forEach(function(a,j){if(a.every(function(o){return segM(o)==o.tot}))k["j"+(j+1)]=1});return k}
-var BURST=0,FL=0,SM=[3,7,14,21,30,40,60,100,150,200,365];
+var BURST=0,FL=0,BUSY=0,PI=-1;
 function best(){var k=Object.keys(D.add).filter(function(x){return D.add[x]>0}).sort(),b=0,r=0,p=-9;k.forEach(function(x){var n=num(x);r=(n==p+1)?r+1:1;p=n;if(r>b)b=r});return b}
 function wk(o){var t=0;for(var i=0;i<7;i++){var d=new Date();d.setDate(d.getDate()-i-o);t+=D.add[iso(d)]||0}return t}
 function chg(fn){var b=dk(),n0=D.add[TD]||0,t0=total(),s0=streak();fn();var a=dk(),nw=Object.keys(a).filter(function(k){return!b[k]}),t="",n1=D.add[TD]||0,t1=total(),s1=streak();
 if(nw.length){CEL={};nw.forEach(function(k){CEL[k]=1});var j=nw.filter(function(k){return k.charAt(0)=="j"})[0];if(j)t="Juz "+j.slice(1)+" complete, mashaAllah";else{var o=SEG.filter(function(x){return"s"+x.k==nw[0]})[0];t=o.name+(o.rng?" "+o.rng:"")+" complete, mashaAllah"}BURST=1}
-else if(t0<3118&&t1>=3118){t="Half of the Qur’an memorised, mashaAllah";BURST=1}
-else if(t1>t0&&Math.floor(t1/250)>Math.floor(t0/250)){t=(Math.floor(t1/250)*250).toLocaleString()+" ayat memorised, mashaAllah";BURST=1}
-else if(s1>s0&&SM.indexOf(s1)>-1){t=s1+"-day streak, mashaAllah";BURST=1}
 else if(n0<D.goal&&n1>=D.goal){t="Today’s goal done, mashaAllah";BURST=1}
 if(n1>n0)FL=n1-n0;if(t)toast(t)}
 function after(){try{var h=document.querySelector("#hz .hero");if(BURST&&h&&tab=="today"){for(var i=0;i<14;i++){var a=i/14*Math.PI*2,r=46+(i%3)*14,p=document.createElement("i");p.className="pt";p.style.setProperty("--x",Math.cos(a)*r+"px");p.style.setProperty("--y",Math.sin(a)*r+"px");h.appendChild(p)}}
-var q=document.querySelector("#hz .quick");if(FL&&q&&tab=="today"){var f=document.createElement("span");f.className="fl";f.textContent="+"+FL;q.appendChild(f)}}catch(e){}BURST=0;FL=0}
+var q=document.querySelector("#hz .quick");if(FL&&q&&tab=="today"){var f=document.createElement("span");f.className="fl";f.textContent="+"+FL;q.appendChild(f)}var sq=document.querySelectorAll("#hz .rs i");if(PI>=0&&sq[PI]&&tab=="today")sq[PI].className+=" pop";if(WS){var wb=document.querySelector('#hz [data-a="wsave"]');if(wb){wb.textContent="Saved ✓";wb.className="b on ok"}}}catch(e){}BURST=0;FL=0;PI=-1;WS=0}
 function opts(a,sel){return a.map(function(x){return'<option value="'+x[0]+'"'+(x[0]==sel?" selected":"")+'>'+x[1]+'</option>'}).join("")}
 var SO=NAMES.map(function(n,i){return[i+1,(i+1)+". "+n]});
 function ring(n,g){var c=2*Math.PI*34,done=n>=g;return'<svg class="ring'+(done?" ok":"")+'" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="#1a222b" stroke-width="5"/><circle cx="40" cy="40" r="34" fill="none" stroke="'+(done?"#5fbf92":"#a9d3f0")+'" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+(c*(1-Math.min(1,n/g))).toFixed(1)+'" transform="rotate(-90 40 40)" style="--c:'+c.toFixed(1)+'"/><text x="40" y="45" text-anchor="middle" font-size="16" fill="#e4ebf2">'+n+'/'+g+'</text></svg>'}
 function dots(){var h='<div class="dots2">';for(var i=13;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);h+='<i class="'+((D.add[iso(d)]||0)>0?"on":"")+'"></i>'}return h+'</div>'}
 function msg(nt,st){var g=D.goal,r=g-nt;if(!D.cur)return"Choose the surah you are learning.";if(nt<1)return st?"Keep your "+st+"-day streak alive. One ayah is enough.":"Start small. One ayah today counts.";if(r>0)return r+" more "+(r==1?"ayah":"ayat")+" to reach today’s goal.";return"Goal done, mashaAllah. Revise, then rest."}
+var WQ=["Why do you memorise the Qur’an?", "Which ayah has meant the most to you recently, and why?", "What does a good day of hifz look like for you?", "What is the biggest obstacle in your memorisation right now?", "Who do you want to make proud through your hifz, and why?", "What makes revision easier for you?", "How has the Qur’an changed you since you began?", "What time of day do you focus best, and how can you protect it?", "Which surah are you most looking forward to memorising, and why?", "What would you tell yourself on the day you started?", "Which habit helps your memorisation, and which one hurts it?", "How do you feel when you recite what you have memorised in prayer?", "Which verse do you want to understand better this week?", "Who supports your hifz, and how can you thank them?", "What small sacrifice are you making for the Qur’an?", "What does consistency mean to you?", "When do you feel most distracted, and what helps?", "What dua do you make before you start memorising?", "What is your intention for the next month?", "What are you grateful for in your journey so far?", "What would completing the Qur’an mean for your life?", "Which lesson from a surah you memorised are you living by?", "How do you recover on days when you feel unmotivated?", "How could you share something from the Qur’an with someone this week?", "What would you change in your routine to make more room for the Qur’an?", "What do you want your relationship with the Qur’an to look like in a year?", "What is a hard moment you got through because of the Qur’an?", "What do you do after finishing a surah to make it stay?", "How do you protect your sincerity while memorising?", "What have you learned about yourself from memorising?", "What is the best advice you have received about hifz?", "Which of Allah’s names do you feel closest to this week, and why?", "What does patience look like in your hifz?", "What would you like to ask Allah for in your next sujood?", "What is one thing you will do tomorrow to take a step closer?", "How can you make your surroundings better for memorising?", "What are you proud of in your hifz so far?", "What pulls your heart away most, and what could replace it?", "Which sunnah do you want to build alongside your hifz?", "If you could recite one surah perfectly right now, which would it be and why?"],W=ld("weekly-v1",{}),WD=null,WALL=0,WS=0;W.ans=W.ans||{};
+function mon(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-(x.getDay()+6)%7);return iso(x)}
+var WK=mon(new Date());W.start=W.start||WK;
+function wsv(){try{localStorage.setItem("weekly-v1",JSON.stringify(W))}catch(e){}mirror()}
+function wqAt(k){var n=Math.round((num(k)-num(W.start))/7);return WQ[((n%WQ.length)+WQ.length)%WQ.length]}
+function wq(){return wqAt(WK)}
+function wAns(){return W.ans[WK]?W.ans[WK].a:""}
+function wfmt(k){var a=k.split("-");return new Date(+a[0],+a[1]-1,+a[2]).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})}
+function wCard(){var e=W.ans[WK],v=WD!=null?WD:(e?e.a:""),h='<h2>THIS WEEK’S QUESTION</h2><div class="lc"><p class="wq">'+esc(wq())+'</p><textarea id="wa" placeholder="Write your answer">'+esc(v)+'</textarea><div class="quick"><button class="b on" data-a="wsave">'+(e?"Update":"Save")+'</button><button class="b" data-a="wall">'+(WALL?"Hide answers":"All answers")+'</button></div>'+(e?'<small>Saved '+new Date(e.t).toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"})+'</small>':"")+'</div>';
+if(WALL){var ks=Object.keys(W.ans).sort().reverse();h+=ks.length?ks.map(function(k){var x=W.ans[k];return'<div class="wh"><small>Week of '+wfmt(k)+'</small><p class="wq2">'+esc(x.q)+'</p><p class="wa2">'+esc(x.a)+'</p></div>'}).join(""):'<p class="mut">Your answers will appear here.</p>'}
+return h}
 function vToday(){var s=D.cur,n=s?mem(s):0,c=s?CNT[s-1]:0,nt=D.add[TD]||0,g=D.goal,st=streak(),l=D.adds[D.adds.length-1],L=revList(),rs=curRev(),tt=total(),i=L.indexOf(rs),full=nt>=g&&(D.rev[TD]||0)>0,mp=Math.floor(tt/250)*250,mn=Math.min(ALL,mp+250),w0=wk(0),w1=wk(7),h;
-h='<div class="hero">'+ring(nt,g)+'<div><b>'+st+'</b><span>day streak</span><small>Best '+Math.max(best(),st)+'</small></div></div>'+dots()+'<p class="msg'+(full?" ok":"")+'">'+esc(full?"Day complete, mashaAllah. Rest well.":msg(nt,st))+'</p>'+(D.why?'<p class="why">“'+esc(D.why)+'”</p>':"")+'<h2>LEARN</h2><div class="lc"><select data-a="cur"><option value="0">Choose a surah</option>'+opts(SO,s)+'</select>';
+h='<div class="hero">'+ring(nt,g)+'<div><b>'+st+'</b><span>day streak</span><small>Best '+Math.max(best(),st)+'</small></div></div>'+dots()+'<p class="msg'+(full?" ok":"")+'">'+esc(full?"Day complete, mashaAllah. Rest well.":msg(nt,st))+'</p>'+(wAns()?'<p class="why">“'+esc(wAns().slice(0,120))+'”</p>':"")+'<h2>LEARN</h2><div class="lc"><select data-a="cur"><option value="0">Choose a surah</option>'+opts(SO,s)+'</select>';
 if(s){h+='<p class="nm">'+n+' of '+c+' ayat</p><div class="pb"><i style="width:'+n/c*100+'%"></i></div>';
 if(n<c)h+='<small>Next: ayah '+(n+1)+'</small><div class="quick">'+[1,2,3,5].map(function(x){return'<button class="b" data-a="addv" data-n="'+x+'">+'+x+'</button>'}).join("")+(l&&l.d===TD?'<button class="b" data-a="undo">Undo</button>':"")+'</div>';else h+='<small>Surah complete, mashaAllah. Choose your next surah above.</small>'}
 h+='</div><h2>REVISE</h2>';
-if(!rs)h+='<p class="mut">Nothing to revise yet.</p>';else h+='<div class="lc'+(RA?" slide":"")+'"><p class="nm">'+esc(NAMES[rs-1])+'</p><small>Ayat 1–'+mem(rs)+' · '+(i+1)+' of '+L.length+' · Round '+D.rr+'</small><div class="rs">'+L.map(function(x,k){return'<i class="'+(k<i?"on":k==i?"cur":"")+'"></i>'}).join("")+'</div><div class="quick"><button class="b on big" data-a="rd">Done</button></div></div><p class="mut">Revised today: '+(D.rev[TD]||0)+'</p><div class="set"><label>Jump to<select data-a="rsel">'+opts(L.map(function(x){return[x,NAMES[x-1]]}),rs)+'</select></label></div>';
-h+='<h2>NEXT MILESTONE</h2><div class="lc"><p class="nm">'+(tt>=ALL?"Complete":mn.toLocaleString()+" ayat")+'</p>'+(tt>=ALL?"":'<small>'+(mn-tt)+' to go</small><div class="pb"><i style="width:'+(tt-mp)/(mn-mp)*100+'%"></i></div>')+'</div><p class="mut">This week: '+w0+' ayat'+(w0>w1?" · up "+(w0-w1)+" on last week":"")+'</p><p class="tip">'+esc(TIPS[Math.floor(T)%TIPS.length])+'</p><h2>DAILY GOAL</h2><div class="step"><button class="b" data-a="gm">−</button><b>'+g+'</b><span>'+(g==1?"ayah":"ayat")+' a day</span><button class="b" data-a="gp">+</button></div><small>Even one ayah keeps your streak going.</small><h2>MY WHY</h2><div class="set"><input data-a="why" maxlength="120" placeholder="Why do you memorise the Qur’an?" value="'+esc(D.why||"")+'"></div>';
+if(!rs)h+='<p class="mut">Nothing to revise yet.</p>';else h+='<div class="lc rv'+(RA?" slide":"")+'"><p class="nm">'+esc(NAMES[rs-1])+'</p><small>Ayat 1–'+mem(rs)+' · '+(i+1)+' of '+L.length+' · Round '+D.rr+'</small><div class="rs">'+L.map(function(x,k){return'<i class="'+(k<i?"on":k==i?"cur":"")+'"></i>'}).join("")+'</div><div class="quick"><button class="b on big" data-a="rd">Done</button></div></div><p class="mut">Revised today: '+(D.rev[TD]||0)+'</p><div class="set"><label>Jump to<select data-a="rsel">'+opts(L.map(function(x){return[x,NAMES[x-1]]}),rs)+'</select></label></div>';
+h+='<p class="mut">This week: '+w0+' ayat'+(w0>w1?" · up "+(w0-w1)+" on last week":"")+'</p><p class="tip">'+esc(TIPS[Math.floor(T)%TIPS.length])+'</p><h2>DAILY GOAL</h2><div class="step"><button class="b" data-a="gm">−</button><b>'+g+'</b><span>'+(g==1?"ayah":"ayat")+' a day</span><button class="b" data-a="gp">+</button></div><small>Even one ayah keeps your streak going.</small>'+wCard()+'';
 return h}
 function sz(n){return n<=3?46:n<=6?34:n<=12?26:n<=20?22:18}
 function vMap(){var full=0,h="";
 for(var j=29;j>=0;j--){var a=NJ[j],m=0,t=0;a.forEach(function(o){m+=segM(o);t+=o.tot});var done=m==t;if(done)full++;
 h+='<div class="jb'+(anim?" in":"")+(done?" full":"")+(CEL["j"+(j+1)]?" cel":"")+'" style="--i:'+(29-j)+';--c:'+sz(a.length)+'px"><div class="jh"><b>Juz '+(j+1)+'</b><span>'+(done?"✓":Math.round(m/t*100)+"%")+'</span></div><div class="cg">';
-a.forEach(function(o){var mm=segM(o),p=mm/o.tot*100,part=mm>0&&mm<o.tot;h+='<button class="cl'+(mm==o.tot?" f":part?" p":"")+(D.cur==o.sn?" cur":"")+(CEL["s"+o.k]?" cel":"")+'" data-a="seg" data-k="'+o.k+'"'+(part?' style="background:linear-gradient(to top,#3b6f93 '+p+'%,#0a0f13 '+p+'%)"':"")+'>'+o.sn+'</button>'});
+a.forEach(function(o){var mm=segM(o),p=mm/o.tot*100,part=mm>0&&mm<o.tot;h+='<button class="cl'+(mm==o.tot?" f":part?" p":"")+(D.cur==o.sn?" cur":"")+(CEL["s"+o.k]?" cel":"")+'" data-a="seg" data-k="'+o.k+'"'+'>'+(part?'<i style="height:'+p.toFixed(0)+'%"></i>':"")+'<span>'+o.sn+'</span></button>'});
 h+='</div></div>'}
 return'<p class="mut">'+full+' of 30 juz complete · '+total().toLocaleString()+' of '+ALL.toLocaleString()+' ayat. Tap a surah to edit it.</p><div class="jgrid">'+h+'</div>'}
 function dl(x){return new Date(x*864e5).toLocaleDateString(undefined,{day:"numeric",month:"short",timeZone:"UTC"})}
@@ -385,23 +460,86 @@ document.addEventListener("click",function(e){if(/^(SELECT|INPUT|OPTION)$/.test(
 if(a=="noop")return;
 if(a=="tab"){tab=k;anim=(k=="map")}else if(a=="seg")sk=k;else if(a=="close")sk=null;
 else if(a=="addv"){buzz(10);chg(function(){addV(+d.n)})}else if(a=="undo")undo();
-else if(a=="rd"){buzz(14);var w=revDone();RA=1;if(w){toast("Round complete, mashaAllah");BURST=1}}
+else if(a=="rd"){if(BUSY)return;BUSY=1;var rc=document.querySelector("#hz .rv"),rs0=curRev(),rn=NAMES[rs0-1],pi=revList().indexOf(rs0),w=revDone(),ov=null;buzz([12,40,12,40,24]);PI=w?-1:pi;
+if(rc){ov=document.createElement("div");ov.className="fin";var dd="";for(var q=0;q<16;q++){var an=q/16*Math.PI*2,rr=60+(q%3)*16;dd+='<i style="--x:'+(Math.cos(an)*rr).toFixed(0)+'px;--y:'+(Math.sin(an)*rr).toFixed(0)+'px"></i>'}
+ov.innerHTML='<b></b><svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="27"/><path d="M18 31l8 8 16-18"/></svg><span>'+esc(rn)+' revised</span>'+dd;rc.appendChild(ov)}
+setTimeout(function(){BUSY=0;RA=1;if(w){toast("Round complete, mashaAllah");BURST=1}render()},ov?900:0);return}
 else if(a=="gm")D.goal=Math.max(1,D.goal-1),save();else if(a=="gp")D.goal=Math.min(50,D.goal+1),save();
 else if(a=="save"){var s1=+d.s,v1=Math.max(0,Math.min(CNT[s1-1],+document.getElementById("sn").value||0));chg(function(){setMem(s1,v1)});sk=null}
 else if(a=="ay"){var s2=+d.s,a2=+k,pm=mem(s2);chg(function(){setMem(s2,a2==pm?a2-1:a2)})}
 else if(a=="scur"){D.cur=+d.s;save();sk=null;tab="today"}
-else if(a=="rnow"){D.rp=+d.s;save();sk=null;tab="today";RA=1}
+else if(a=="rnow"){D.rp=+d.s;save();sk=null;tab="today";RA=1}else if(a=="wsave"){var ta=document.getElementById("wa"),tv=ta?ta.value.trim():"";if(tv){W.ans[WK]={q:wq(),a:tv,t:Date.now()};wsv();WD=null;WS=1;buzz(12)}}else if(a=="wall"){WALL=!WALL}
 render()});
-document.addEventListener("change",function(e){var a=e.target.dataset&&e.target.dataset.a,v=+e.target.value;if(a=="why"){D.why=e.target.value.slice(0,120);save()}else if(a=="cur"){D.cur=v;save();render()}else if(a=="rsel"){D.rp=v;save();RA=1;render()}});
+document.addEventListener("change",function(e){var a=e.target.dataset&&e.target.dataset.a,v=+e.target.value;if(a=="cur"){D.cur=v;save();render()}else if(a=="rsel"){D.rp=v;save();RA=1;render()}});
 document.getElementById("hdate").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"});
-if(!D.init)seed();mirror();render();window.hzRefresh=render;
+if(!D.init)seed();if(!W.init){W.init=1;if(D.why&&!W.ans[WK]){W.ans[WK]={q:WQ[0],a:D.why,t:Date.now()};D.why=""}wsv();save()}
+document.addEventListener("input",function(e){if(e.target.id=="wa")WD=e.target.value});
+mirror();render();window.hzRefresh=render;
 })();</script>
-<script>(function(){var nav=document.getElementById("nav"),hb=document.getElementById("hb"),hz=document.getElementById("hz");
-function show(t){hb.hidden=t!="habits";hz.hidden=t!="hifz";[].forEach.call(nav.children,function(b){b.className=b.dataset.t==t?"on":""});try{localStorage.setItem("apptab",t)}catch(e){}
-if(t=="habits"&&window.hbRefresh)window.hbRefresh();if(t=="hifz"&&window.hzRefresh)window.hzRefresh();window.scrollTo(0,0);try{history.replaceState(null,"","#"+t)}catch(e){}}
+<script>(function(){
+var DQ=["What went well today?","What was hard, and why?","What will I do better tomorrow?"];
+function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+var R=ld("reflect-v1",{});R.qs=R.qs&&R.qs.length?R.qs:DQ.slice();R.ans=R.ans||{};
+var open={},draft=null,edit=0;
+function p2(n){return("0"+n).slice(-2)}
+function iso(d){return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function last(){var k=Object.keys(R.ans).sort();return k.length?k[k.length-1]:""}
+function mir(){try{var r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put({last:last()},"reflect")}catch(e){}}}catch(e){}}
+function sv(){try{localStorage.setItem("reflect-v1",JSON.stringify(R))}catch(e){}mir()}
+function fmt(k){var a=k.split("-");return new Date(+a[0],+a[1]-1,+a[2]).toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
+function dot(){var b=document.querySelector('#nav button[data-t="reflect"]');if(b)b.classList.toggle("dot",new Date().getHours()>=16&&!R.ans[iso(new Date())])}
+function render(){var td=iso(new Date()),e=R.ans[td],h="";if(!R.qs.length)R.qs=DQ.slice();
+if(edit){h+='<h2>YOUR QUESTIONS</h2>'+R.qs.map(function(q,i){return'<div class="qe"><input class="qi" data-i="'+i+'" value="'+esc(q)+'" placeholder="Type a question"><button class="b" data-r="del" data-i="'+i+'">×</button></div>'}).join("")+'<div class="row2"><button class="b" data-r="addq">Add question</button><button class="b on" data-r="done">Done</button></div><p class="mut">Past answers keep the questions they were asked with.</p>'}
+else{var vals=draft||(e?e.a:[]);h+='<h2>'+(e?"TODAY, SAVED":"TODAY")+'</h2>'+R.qs.map(function(q,i){return'<div class="qa"><label>'+esc(q)+'</label><textarea data-i="'+i+'">'+esc(vals[i]||"")+'</textarea></div>'}).join("")+'<div class="row2"><button class="b on" id="rsave" data-r="save">'+(e?"Update":"Save")+'</button><button class="b" data-r="edit">Edit questions</button></div>'+(e?'<p class="mut">Last saved '+new Date(e.t).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})+'</p>':"")}
+var ks=Object.keys(R.ans).sort().reverse().filter(function(k){return k!==td});
+h+='<h2>HISTORY</h2>';if(!ks.length)h+='<p class="mut">Your past answers will appear here with their dates.</p>';
+ks.forEach(function(k){var en=R.ans[k],o=open[k],f=(en.a.filter(Boolean)[0]||"").slice(0,90);h+='<div class="ent" data-r="tg" data-k="'+k+'"><b>'+fmt(k)+'</b>'+(o?en.q.map(function(q,i){return'<div class="q">'+esc(q)+'</div><div class="a">'+esc(en.a[i]||"—")+'</div>'}).join(""):'<small>'+esc(f)+'</small>')+'</div>'});
+if(Object.keys(R.ans).length)h+='<div class="row2"><button class="b" data-r="copy">Copy all</button></div>';
+document.getElementById("rfv").innerHTML=h;dot()}
+var rf=document.getElementById("rf");
+rf.addEventListener("input",function(ev){var t=ev.target;if(t.classList.contains("qi")){R.qs[+t.dataset.i]=t.value;sv()}else if(t.tagName=="TEXTAREA")draft=[].map.call(rf.querySelectorAll("textarea"),function(x){return x.value})});
+rf.addEventListener("click",function(ev){var b=ev.target.closest("[data-r]");if(!b)return;var a=b.dataset.r,i=+b.dataset.i;
+if(a=="save"){var ta=[].map.call(rf.querySelectorAll("textarea"),function(x){return x.value.trim()}),q=R.qs.slice();R.ans[iso(new Date())]={q:q,a:ta,t:Date.now()};sv();draft=null;render();var s=document.getElementById("rsave");if(s){s.textContent="Saved ✓";s.className="b ok"}try{if(navigator.vibrate)navigator.vibrate([15,30,15])}catch(e){}return}
+if(a=="edit"){edit=1}else if(a=="done"){edit=0;R.qs=R.qs.filter(function(x){return x.trim()});sv()}else if(a=="addq"){R.qs.push("");sv()}else if(a=="del"){R.qs.splice(i,1);sv()}
+else if(a=="tg"){open[b.dataset.k]=!open[b.dataset.k]}
+else if(a=="copy"){var t=Object.keys(R.ans).sort().map(function(k){var en=R.ans[k];return fmt(k)+"\n"+en.q.map(function(q,j){return q+"\n"+(en.a[j]||"-")}).join("\n")}).join("\n\n");try{navigator.clipboard.writeText(t);b.textContent="Copied ✓"}catch(e){b.textContent="Copy not available"}return}
+render()});
+document.getElementById("rdate").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"});
+window.rfRefresh=render;window.rfDot=dot;mir();render();
+})();</script>
+<script>(function(){
+var KEYS=["habits-v2","habitlog-v2","hifz-v3","reflect-v1","weekly-v1"],API=window.WORKER_URL||"",ok=API&&API.indexOf("PUT_YOUR")<0;
+function $(i){return document.getElementById(i)}
+function say(t){$("bs").textContent=t}
+function gi(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function code(){return gi("synccode")||""}
+function snap(){var d={};KEYS.forEach(function(k){var v=gi(k);if(v!=null)d[k]=v});return{v:1,t:new Date().toISOString(),data:d}}
+function post(p,b){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)})}
+function btns(){var c=code();$("bon").hidden=!!c;$("bnow").hidden=!c;$("bshow").hidden=!c}
+function stat(){var c=code(),t=gi("bktime");say(!ok?"Add your Worker address in config.js to use cloud backup.":c?"Cloud backup is on. Last backup: "+(t?new Date(t).toLocaleString():"not yet"):"Cloud backup is off. Turn it on so you can restore everything if you delete the app.")}
+async function push(force){var c=code();if(!c||!ok)return false;var s=snap(),h=JSON.stringify(s.data);if(!force&&h===gi("bkhash"))return true;
+try{var r=await post("/backup",{code:c,data:s});if(!r.ok)return false;localStorage.setItem("bkhash",h);localStorage.setItem("bktime",s.t);return true}catch(e){return false}}
+$("bon").onclick=async function(){if(!ok){stat();return}var a=new Uint8Array(16);crypto.getRandomValues(a);var c=[].map.call(a,function(x){return("0"+x.toString(16)).slice(-2)}).join("");
+localStorage.setItem("synccode",c);localStorage.removeItem("bkhash");var g=await push(true);
+if(g){btns();say("Cloud backup is on.\nYour sync code, save it in Notes. You need it to restore:\n"+c)}else{localStorage.removeItem("synccode");say("Could not reach your Worker. Paste the new worker.js into Cloudflare, deploy, and try again.")}};
+$("bnow").onclick=async function(){var g=await push(true);say(g?"Backed up just now.":"Backup failed. Check your connection and Worker.");if(g)setTimeout(stat,2500)};
+$("bshow").onclick=function(){say("Your sync code:\n"+code()+"\nKeep it somewhere safe.")};
+$("bcopy").onclick=function(){try{navigator.clipboard.writeText(JSON.stringify(snap()));say("Backup copied. Paste it into Notes to keep a copy.")}catch(e){say("Copy is not available here.")}};
+$("brestore").onclick=async function(){var v=$("brest").value.trim();if(!v){say("Paste your sync code or a copied backup first.");return}var s=null,fromCode=v.charAt(0)!="{";
+try{if(!fromCode)s=JSON.parse(v);else{if(!ok){say("Add your Worker address in config.js first.");return}var r=await post("/restore",{code:v});if(r.status==404){say("No backup found for that code.");return}if(!r.ok)throw 0;s=(await r.json()).data}}catch(e){say("Could not read that backup.");return}
+if(!s||!s.data){say("That does not look like a backup.");return}
+if(!confirm("Replace the data on this device with this backup?"))return;
+KEYS.forEach(function(k){if(s.data[k]!=null)localStorage.setItem(k,s.data[k])});if(fromCode)localStorage.setItem("synccode",v);localStorage.removeItem("bkhash");location.reload()};
+document.addEventListener("visibilitychange",function(){if(document.hidden)push(false)});setInterval(function(){if(!document.hidden)push(false)},60000);setTimeout(function(){push(false)},4000);
+btns();stat();window.bkPush=push;
+})();</script>
+<script>(function(){var nav=document.getElementById("nav"),S={habits:document.getElementById("hb"),hifz:document.getElementById("hz"),reflect:document.getElementById("rf")};
+function show(t){if(!S[t])t="habits";Object.keys(S).forEach(function(k){S[k].hidden=k!=t});[].forEach.call(nav.children,function(b){b.classList.toggle("on",b.dataset.t==t)});try{localStorage.setItem("apptab",t)}catch(e){}
+if(t=="habits"&&window.hbRefresh)window.hbRefresh();if(t=="hifz"&&window.hzRefresh)window.hzRefresh();if(t=="reflect"&&window.rfRefresh)window.rfRefresh();if(window.rfDot)window.rfDot();window.scrollTo(0,0);try{history.replaceState(null,"","#"+t)}catch(e){}}
 nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.t)});
-var s=null;try{s=localStorage.getItem("apptab")}catch(e){}
-show(location.hash=="#hifz"?"hifz":location.hash=="#habits"?"habits":s=="hifz"?"hifz":"habits");
+var st=null;try{st=localStorage.getItem("apptab")}catch(e){}
+show(location.hash?location.hash.slice(1):st||"habits");
 var d0=new Date().toDateString();document.addEventListener("visibilitychange",function(){if(!document.hidden&&new Date().toDateString()!==d0)location.reload()})})();</script>
 </body>
 </html>
