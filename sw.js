@@ -21,7 +21,7 @@ function iso(d){return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate()
 function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
 function build(d,S,H){
 var h=d.getHours(),L=[],title,today=iso(d),yd=iso(new Date(d.getTime()-864e5)),hp=H&&H.d===today?H:null,n=hp?hp.n:0,g=H?H.goal:3,q=Q[(Math.floor(d/864e5)*3+Math.floor(h/8))%Q.length],qs=q[0]+" ("+q[1]+")";
-if(h<11){title="Good morning";L.push(qs);if(H&&H.cur&&n<g)L.push("Today: "+H.cur+", from ayah "+H.nx+" · goal "+g+(g==1?" ayah":" ayat"))}
+if(h<11){title="Good morning";L.push(H&&H.why&&Math.floor(d/864e5)%2==0?"“"+H.why+"”":qs);if(H&&H.cur&&n<g)L.push("Today: "+H.cur+", from ayah "+H.nx+" · goal "+g+(g==1?" ayah":" ayat"))}
 else if(h<16){title="Midday check-in";if(H&&H.rv&&!(hp&&hp.rd))L.push("Revise: "+H.rv);if(H&&n<g)L.push(n+" of "+g+" new ayat so far");if(!L.length)L.push(qs)}
 else{title="Evening check-in";if(n<1)L.push(H&&H.st>0&&(H.d===today||H.d===yd)?"Keep your "+H.st+"-day streak alive. One ayah is enough.":"One ayah today keeps you going.");else if(n<g)L.push((g-n)+" more for today’s goal");else L.push("Goal done, mashaAllah")}
 if(S&&S.habits){var done=(S.log&&S.log[key(d)])||[],left=S.habits.filter(function(x){return done.indexOf(x.id)<0});
