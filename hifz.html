@@ -11,100 +11,91 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Hifz</title>
 <style>
-:root{--bg:#0a0d11;--ink:#e4ebf2;--muted:#5d6b78;--line:#1a222b;--ice:#a9d3f0;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#0a0d11;--ink:#e4ebf2;--muted:#5d6b78;--line:#1a222b;--ice:#a9d3f0;--green:#5fbf92;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--ink);font:300 17px/1.45 "Helvetica Neue",Helvetica,"Segoe UI",system-ui,sans-serif;min-height:100vh}
-main{max-width:480px;margin:0 auto;padding:44px 22px 80px}
+main{max-width:480px;margin:0 auto;padding:44px 22px 90px}
 a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.03em}
 .date{color:var(--muted);font-size:.85rem;letter-spacing:.04em;margin:14px 0 4px}
-h1{font-weight:200;font-size:2.4rem;letter-spacing:-.03em;margin:0 0 22px}
-h2{font-weight:300;font-size:.82rem;color:var(--muted);letter-spacing:.05em;margin:28px 0 6px}
-.tabs{display:flex;gap:24px;margin:0 0 22px;border-bottom:1px solid var(--line)}
+h1{font-weight:200;font-size:2.4rem;letter-spacing:-.03em;margin:0 0 20px}
+h2{font-weight:300;font-size:.8rem;color:var(--muted);letter-spacing:.06em;margin:28px 0 8px}
+.tabs{display:flex;gap:26px;margin:0 0 22px;border-bottom:1px solid var(--line)}
 .tabs button{border:0;background:none;color:var(--muted);font:inherit;font-size:.95rem;padding:8px 0;cursor:pointer;border-bottom:1px solid transparent;margin-bottom:-1px}
 .tabs button.on{color:var(--ice);border-color:var(--ice)}
-.stats{display:flex;gap:10px;margin-bottom:18px}
-.stats div{flex:1;border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center}
-.stats b{display:block;font-weight:200;font-size:1.7rem;color:var(--ice)}
-.stats span{font-size:.7rem;color:var(--muted)}
-.msg{margin:0 0 4px;padding-left:14px;border-left:1px solid var(--ice)}
-.row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
-.row i{width:10px;height:10px;border-radius:50%;flex:none}
-.row .t{flex:1;min-width:0;cursor:pointer}
-.row .t span{display:block;overflow-wrap:anywhere}
+.hero{display:flex;align-items:center;gap:22px;margin:0 0 14px}
+.ring{width:96px;height:96px;flex:none}
+.ring circle+circle{animation:rg .9s cubic-bezier(.2,.8,.2,1)}
+.ring.ok{filter:drop-shadow(0 0 7px rgba(95,191,146,.55))}
+@keyframes rg{from{stroke-dashoffset:var(--c)}}
+.hero b{display:block;font-weight:200;font-size:2.6rem;line-height:1;color:var(--ice)}
+.hero span{font-size:.8rem;color:var(--muted)}
+.dots2{display:flex;gap:6px;margin:0 0 16px}
+.dots2 i{width:8px;height:8px;border-radius:50%;border:1px solid var(--muted)}
+.dots2 i.on{background:var(--green);border-color:var(--green)}
+.msg{margin:0;padding-left:14px;border-left:1px solid var(--ice)}
 small,.mut{color:var(--muted);font-size:.8rem}
 .mut{margin:10px 0}
-.b{border:1px solid var(--line);background:none;color:var(--ice);font:inherit;font-size:.85rem;padding:8px 14px;border-radius:999px;cursor:pointer;transition:transform .15s}
+.lc{border:1px solid var(--line);border-radius:16px;padding:18px;margin:4px 0 10px}
+.lc.slide{animation:sl .45s ease-out}
+@keyframes sl{from{opacity:0;transform:translateX(16px)}}
+.lc select{width:100%;margin-bottom:14px}
+.nm{font-size:1.3rem;font-weight:300;margin:0}
+.pb{height:3px;background:var(--line);border-radius:2px;margin:10px 0}
+.pb i{display:block;height:100%;background:var(--ice);border-radius:2px;transition:width .5s}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.b{border:1px solid var(--line);background:none;color:var(--ice);font:inherit;font-size:.9rem;padding:9px 16px;border-radius:999px;cursor:pointer;transition:transform .15s}
 .b.on{background:var(--ice);color:var(--bg);border-color:var(--ice)}
-.b:active{transform:scale(.94)}
-.juz{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.jt{border:1px solid var(--line);background:none;color:var(--ink);border-radius:12px;padding:10px 4px 8px;cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:6px}
-.jt b{font-weight:300;font-size:1.15rem}
-.jt small{font-size:.66rem}
-.mb{display:flex;gap:1px;width:80%;height:4px}
-.mb i{flex:1;border-radius:1px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 14px;font-size:.74rem;color:var(--muted)}
-.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sc{border:1px solid var(--line);border-left-width:3px;background:none;color:var(--ink);border-radius:10px;padding:10px;text-align:left;font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:2px}
-.sc small{font-size:.72rem}
-.sc em{font-style:normal;font-size:.72rem}
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;z-index:20}
-.sheet[hidden]{display:none}
-.card{max-height:88vh;overflow-y:auto;width:100%;max-width:480px;margin:0 auto;background:#10161c;border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding:22px 22px calc(22px + env(safe-area-inset-bottom,0px))}
-.card h3{margin:0 0 4px;font-weight:300;font-size:1.3rem}
-.seg3{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}
-.tip{margin-top:28px;color:var(--muted);font-size:.9rem;line-height:1.6}
-.set{display:flex;flex-direction:column;gap:12px}
-.set label{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted)}
+.b.big{padding:12px 34px;font-size:1rem}
+.b:active{transform:scale(.93)}
+.tip{margin:28px 0 0;color:var(--muted);font-size:.9rem;line-height:1.6}
+.step{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.step b{font-weight:200;font-size:1.8rem;color:var(--ice);min-width:1.6em;text-align:center}
+.step span{color:var(--muted);flex:1}
+.set{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.set label{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);gap:12px}
 select,input{font:inherit;font-size:.95rem;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:8px 2px;border-radius:0;color-scheme:dark}
 select option{background:#10161c}
 input:focus,select:focus{outline:0;border-color:var(--ice)}
-.add{display:flex;gap:10px;align-items:center;margin:14px 0}
-.add input{flex:1;min-width:0}
-.pb{height:3px;background:var(--line);border-radius:2px;margin:8px 0}
-.pb i{display:block;height:100%;background:var(--ice);border-radius:2px;transition:width .4s}
-.lc{border:1px solid var(--line);border-radius:14px;padding:16px;margin:4px 0 8px}
-.lc select{width:100%;margin-bottom:12px}
-.lc .nm{font-size:1.25rem;font-weight:300;margin:0}
-.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.dots2{display:flex;gap:6px;margin:0 0 16px}
-.dots2 i{width:8px;height:8px;border-radius:50%;border:1px solid var(--muted)}
-.dots2 i.on{background:var(--ice);border-color:var(--ice)}
-.sc .pb{margin:6px 0 2px}
-.num{width:90px;text-align:center}
+.num{width:80px;text-align:center}
 .jgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.jb{aspect-ratio:1;border:1px solid var(--line);border-radius:16px;background:#0d1217;padding:10px;display:flex;flex-direction:column;gap:8px;transition:border-color .3s,box-shadow .3s}
-.jb.in{animation:pin .5s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:calc(var(--i)*30ms)}
-.jb.full{background:linear-gradient(160deg,#10301f,#0b1812);border-color:#5fbf92;box-shadow:0 0 18px rgba(95,191,146,.22)}
+.jb{border:1px solid var(--line);border-radius:16px;background:#0d1217;padding:12px;min-height:150px;display:flex;flex-direction:column;gap:10px;transition:border-color .3s,box-shadow .3s}
+.jb.in{animation:pin .5s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:calc(var(--i)*25ms)}
+.jb.full{background:linear-gradient(160deg,#10301f,#0b1812);border-color:var(--green);box-shadow:0 0 18px rgba(95,191,146,.22)}
 .jh{display:flex;justify-content:space-between;align-items:baseline;font-size:.78rem;color:var(--muted)}
 .jh b{font-weight:300;color:var(--ink);font-size:.95rem}
-.jb.full .jh b,.jb.full .jh span{color:#5fbf92}
-.cg{flex:1;display:grid;gap:3px;align-content:center}
-.cl{aspect-ratio:1;border-radius:4px;border:1px solid #1f2a34;background:#0a0f13;font-size:.55rem;color:#3d4b57;display:grid;place-items:center;padding:0;cursor:pointer;font-family:inherit;transition:transform .15s}
+.jb.full .jh b,.jb.full .jh span{color:var(--green)}
+.cg{display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start;margin:auto 0}
+.cl{width:var(--c);height:var(--c);font-size:max(8px,calc(var(--c)*.38));border-radius:4px;border:1px solid #1f2a34;background:#0a0f13;color:#3d4b57;padding:0;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;transition:transform .15s}
 .cl:active{transform:scale(.85)}
-.cl.f{color:#0a0d11;font-weight:600;border-color:transparent}
+.cl.p{color:#dbeaf6;text-shadow:0 0 3px #000}
+.cl.f{background:var(--green);border-color:var(--green);color:#0a0d11;font-weight:600}
 .cl.cur{outline:1px solid #5d86a3;outline-offset:1px;animation:cur 1.8s ease-in-out infinite}
 .cel{animation:cel .9s ease-out}
 @keyframes pin{from{opacity:0;transform:scale(.88)}}
 @keyframes cel{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(95,191,146,.8)}40%{transform:scale(1.1)}100%{transform:scale(1);box-shadow:0 0 0 22px rgba(95,191,146,0)}}
 @keyframes cur{50%{outline-color:transparent}}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;z-index:20}
+.sheet[hidden]{display:none}
+.card{max-height:88vh;overflow-y:auto;width:100%;max-width:480px;margin:0 auto;background:#10161c;border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding:22px 22px calc(22px + env(safe-area-inset-bottom,0px))}
+.card h3{margin:0 0 4px;font-weight:300;font-size:1.3rem}
+.seg3{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
 .ay{display:grid;grid-template-columns:repeat(auto-fill,minmax(26px,1fr));gap:3px;margin:12px 0}
-.ac{aspect-ratio:1;border-radius:4px;border:1px solid #1f2a34;background:#0a0f13;color:#4b5a66;font:inherit;font-size:.62rem;padding:0;cursor:pointer;transition:transform .12s}
+.ac{height:26px;border-radius:4px;border:1px solid #1f2a34;background:#0a0f13;color:#4b5a66;font:inherit;font-size:.62rem;padding:0;cursor:pointer;transition:transform .12s}
 .ac:active{transform:scale(.85)}
-.ac.f{color:#0a0d11;font-weight:600;border-color:transparent}
+.ac.f{background:var(--green);border-color:var(--green);color:#0a0d11;font-weight:600}
 .ac.nx{outline:1px solid var(--ice);outline-offset:1px;color:var(--ice)}
-.toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#10301f;border:1px solid #5fbf92;color:#d9f5e7;padding:11px 20px;border-radius:999px;font-size:.9rem;z-index:30;pointer-events:none;animation:toast 3.4s forwards;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#10301f;border:1px solid var(--green);color:#d9f5e7;padding:11px 20px;border-radius:999px;font-size:.9rem;z-index:30;pointer-events:none;animation:toast 3.4s forwards;white-space:nowrap}
+.toast[hidden]{display:none}
 @keyframes toast{0%{opacity:0;transform:translate(-50%,12px)}10%{opacity:1;transform:translate(-50%,0)}85%{opacity:1}100%{opacity:0}}
 svg text{font-family:inherit}
 button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <main>
-<div class="top"><a href="index.html">← Habits</a></div>
+<a href="index.html">← Habits</a>
 <p class="date" id="date"></p>
 <h1>Hifz</h1>
 <div class="tabs" id="tabs"></div>
@@ -116,125 +107,89 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 var NAMES="Al-Fatihah|Al-Baqarah|Ali ‘Imran|An-Nisa|Al-Ma’idah|Al-An’am|Al-A’raf|Al-Anfal|At-Tawbah|Yunus|Hud|Yusuf|Ar-Ra’d|Ibrahim|Al-Hijr|An-Nahl|Al-Isra|Al-Kahf|Maryam|Ta-Ha|Al-Anbiya|Al-Hajj|Al-Mu’minun|An-Nur|Al-Furqan|Ash-Shu’ara|An-Naml|Al-Qasas|Al-‘Ankabut|Ar-Rum|Luqman|As-Sajdah|Al-Ahzab|Saba|Fatir|Ya-Sin|As-Saffat|Sad|Az-Zumar|Ghafir|Fussilat|Ash-Shura|Az-Zukhruf|Ad-Dukhan|Al-Jathiyah|Al-Ahqaf|Muhammad|Al-Fath|Al-Hujurat|Qaf|Adh-Dhariyat|At-Tur|An-Najm|Al-Qamar|Ar-Rahman|Al-Waqi’ah|Al-Hadid|Al-Mujadila|Al-Hashr|Al-Mumtahanah|As-Saff|Al-Jumu’ah|Al-Munafiqun|At-Taghabun|At-Talaq|At-Tahrim|Al-Mulk|Al-Qalam|Al-Haqqah|Al-Ma’arij|Nuh|Al-Jinn|Al-Muzzammil|Al-Muddaththir|Al-Qiyamah|Al-Insan|Al-Mursalat|An-Naba|An-Nazi’at|‘Abasa|At-Takwir|Al-Infitar|Al-Mutaffifin|Al-Inshiqaq|Al-Buruj|At-Tariq|Al-A’la|Al-Ghashiyah|Al-Fajr|Al-Balad|Ash-Shams|Al-Layl|Ad-Duha|Ash-Sharh|At-Tin|Al-‘Alaq|Al-Qadr|Al-Bayyinah|Az-Zalzalah|Al-‘Adiyat|Al-Qari’ah|At-Takathur|Al-‘Asr|Al-Humazah|Al-Fil|Quraysh|Al-Ma’un|Al-Kawthar|Al-Kafirun|An-Nasr|Al-Masad|Al-Ikhlas|Al-Falaq|An-Nas".split("|");
 var CNT=[7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
 var JS=[[1,1],[2,142],[2,253],[3,93],[4,24],[4,148],[5,82],[6,111],[7,88],[8,41],[9,93],[11,6],[12,53],[15,1],[17,1],[18,75],[21,1],[23,1],[25,21],[27,56],[29,46],[33,31],[36,28],[39,32],[41,47],[46,1],[51,31],[58,1],[67,1],[78,1]];
-var TIPS=["One ayah today is a win. Small and steady beats big and rare.","Revise before you add anything new. Strong revision makes new ayat stick.","Learn your new ayat soon after Fajr, when your mind is fresh.","Recite aloud and listen to a reciter you trust. Hearing helps it settle.","Stick to one mushaf so the page layout becomes part of your memory.","Revise today’s ayat again before you sleep.","Keep your daily amount small enough to do on your hardest day.","Mark the ayat you slip on and drill only those.","Keep refreshing the Qur’an in your heart, for it slips away faster than a camel from its rope. (Bukhari & Muslim)","The most beloved deeds to Allah are the consistent ones, even if small. (Bukhari & Muslim)","Teach what you know to someone else. It locks it in.","A missed day is fine. Just begin again today."];
-var CUM=[0];CNT.forEach(function(c){CUM.push(CUM[CUM.length-1]+c)});var ALL=CUM[114],BS=10;
-function gv(s,a){return s>114?ALL+1:CUM[s-1]+a}
-var SEG=[],NJ=[];for(var j=0;j<30;j++)NJ.push([]);
+var TIPS=["One ayah today is a win. Small and steady beats big and rare.","Revise before you add anything new. Strong revision makes new ayat stick.","Learn your new ayat soon after Fajr, when your mind is fresh.","Recite aloud and listen to a reciter you trust. Hearing helps it settle.","Revise today’s ayat again before you sleep.","Keep your daily amount small enough to do on your hardest day.","Keep refreshing the Qur’an in your heart, for it slips away faster than a camel from its rope. (Bukhari & Muslim)","The most beloved deeds to Allah are the consistent ones, even if small. (Bukhari & Muslim)","A missed day is fine. Just begin again today."];
+var ALL=CNT.reduce(function(a,b){return a+b},0),SEG=[],NJ=[];for(var j=0;j<30;j++)NJ.push([]);
 (function(){for(var j=0;j<30;j++){var a=JS[j],b=JS[j+1]||[115,1],last=b[1]>1?b[0]:b[0]-1;
 for(var s=a[0];s<=last;s++){var st=s===a[0]?a[1]:1,cut=s===b[0]&&b[1]>1,en=cut?b[1]-1:CNT[s-1];
 var o={k:(j+1)+"-"+s,juz:j+1,sn:s,name:NAMES[s-1],st:st,en:en,tot:en-st+1,rng:(st>1||cut)?st+"–"+en:""};SEG.push(o);NJ[j].push(o)}}})();
 function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
-var D=ld("hifz-v2",{});["mem","rv","add","rev","rc"].forEach(function(k){D[k]=D[k]||{}});D.adds=D.adds||[];D.cus=D.cus||[];D.cur=D.cur||0;D.cfg=D.cfg||{};D.cfg.cycle=D.cfg.cycle||30;D.cfg.goal=D.cfg.goal||3;
-function save(){try{localStorage.setItem("hifz-v2",JSON.stringify(D))}catch(e){}}
+var D=ld("hifz-v3",{});D.mem=D.mem||{};D.add=D.add||{};D.rev=D.rev||{};D.adds=D.adds||[];D.goal=Math.max(1,D.goal||3);D.rr=D.rr||1;D.rp=D.rp||114;D.rb=D.rb||38;
 function p2(n){return("0"+n).slice(-2)}
 function iso(d){return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
 function num(s){var a=s.split("-");return Date.UTC(+a[0],+a[1]-1,+a[2])/864e5}
-var TD=iso(new Date()),T=num(TD),tab="today",oj=0,sk=null,su=0,SU={f:2,b:39,l:38,c:0},tx='fill="#5d6b78" font-size="9"';
+var TD=iso(new Date()),T=num(TD),tab="today",sk=null,CEL={},anim=0,RA=0,tx='fill="#5d6b78" font-size="9"';
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var COL={n:"#26313b",f:"#5fbf92",d:"#e0b25a",o:"#d9736a"},RK={n:0,f:1,d:2,o:3};
 function mem(s){return D.mem[s]||0}
 function total(){var t=0;for(var s=1;s<=114;s++)t+=mem(s);return t}
-function bk(s,i){return s+":"+i}
-function bago(s,i){return T-num(D.rv[bk(s,i)]||TD)}
-function fd(d){var x=d/D.cfg.cycle;return x<.5?"f":x<1?"d":"o"}
-function blocks(s){var n=mem(s),a=[];for(var i=0;i*BS<n;i++)a.push({s:s,i:i,a:i*BS+1,b:Math.min((i+1)*BS,n)});return a}
 function segM(o){return Math.max(0,Math.min(mem(o.sn),o.en)-o.st+1)}
-function worst(os){var w="n";os.forEach(function(o){var n=segM(o);if(!n)return;for(var i=Math.floor((o.st-1)/BS);i<=Math.floor((o.st+n-2)/BS);i++){var f=fd(bago(o.sn,i));if(RK[f]>RK[w]||w=="n"&&RK[f]>=0)w=RK[f]>RK[w]?f:w}});return w}
-function lab(s,a,b){return NAMES[s-1]+" "+(a==b?a:a+"–"+b)}
+function revList(){var a=[];for(var s=114;s>=1;s--)if(s>=D.rb&&mem(s)>0)a.push(s);return a}
+function curRev(){var L=revList();if(!L.length)return 0;if(L.indexOf(D.rp)>-1)return D.rp;for(var i=0;i<L.length;i++)if(L[i]<=D.rp)return L[i];return L[0]}
+function streak(){var n=0,d=new Date();function on(){return(D.add[iso(d)]||0)>0}if(!on())d.setDate(d.getDate()-1);while(on()){n++;d.setDate(d.getDate()-1)}return n}
+function mirror(){try{var c=curRev(),o={d:TD,goal:D.goal,n:D.add[TD]||0,cur:D.cur?NAMES[D.cur-1]:"",nx:D.cur?mem(D.cur)+1:0,rv:c?NAMES[c-1]+" 1–"+mem(c):"",rd:D.rev[TD]||0,st:streak()},r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put(o,"hifz")}catch(e){}}}catch(e){}}
+function save(){try{localStorage.setItem("hifz-v3",JSON.stringify(D))}catch(e){}mirror()}
+function seed(){D.mem={1:7,2:252};for(var s=39;s<=114;s++)D.mem[s]=CNT[s-1];D.mem[38]=61;D.cur=38;D.rp=114;D.rr=1;D.rb=38;D.init=1;save()}
 function tick(){try{var h=JSON.parse(localStorage.getItem("habitlog-v2")||"{}"),d=new Date(),k=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),a=h[k]||[];if(a.indexOf("quran")<0){a.push("quran");h[k]=a;localStorage.setItem("habitlog-v2",JSON.stringify(h))}}catch(e){}}
-function markRange(s,a,b){for(var i=Math.floor((a-1)/BS);i<=Math.floor((b-1)/BS);i++)D.rv[bk(s,i)]=TD}
-function addV(n){var s=D.cur;if(!s)return;var m=mem(s),add=Math.min(n,CNT[s-1]-m);if(add<=0)return;var a=m+1,b=m+add;
-for(var i=Math.floor((a-1)/BS);i<=Math.floor((b-1)/BS);i++)if(!D.rv[bk(s,i)])D.rv[bk(s,i)]=TD;
-D.mem[s]=b;D.add[TD]=(D.add[TD]||0)+add;D.adds.push({d:TD,s:s,a:a,b:b});if(D.adds.length>80)D.adds.shift();tick();save()}
-var CEL={},anim=0;
-function setMem(s,v){var pv=mem(s);D.mem[s]=v;for(var i=Math.floor(pv/BS);i*BS<v;i++)if(!D.rv[bk(s,i)])D.rv[bk(s,i)]=TD;save()}
+function buzz(p){try{if(navigator.vibrate)navigator.vibrate(p)}catch(e){}}
+function toast(t){try{var e=document.getElementById("toast");e.textContent=t;e.hidden=false;e.style.animation="none";void e.offsetWidth;e.style.animation="";buzz([20,40,20])}catch(x){}}
+function addV(n){var s=D.cur;if(!s)return;var m=mem(s),add=Math.min(n,CNT[s-1]-m);if(add<=0)return;var a=m+1,b=m+add;D.mem[s]=b;D.add[TD]=(D.add[TD]||0)+add;D.adds.push({d:TD,s:s,a:a,b:b});if(D.adds.length>80)D.adds.shift();if(s==D.rb-1)D.rb=s;tick();save()}
+function undo(){var l=D.adds[D.adds.length-1];if(!l||l.d!==TD)return;D.adds.pop();D.mem[l.s]=l.a-1;D.add[TD]=Math.max(0,(D.add[TD]||0)-(l.b-l.a+1));if(!D.mem[l.s]&&l.s==D.rb&&l.s<114)D.rb=l.s+1;save()}
+function setMem(s,v){D.mem[s]=v;if(s==D.rb-1&&v>0)D.rb=s;save()}
+function revDone(){var L=revList(),c=curRev();if(!c)return 0;D.rev[TD]=(D.rev[TD]||0)+1;var i=L.indexOf(c),w=i+1>=L.length;D.rp=w?L[0]:L[i+1];if(w)D.rr++;tick();save();return w}
 function dk(){var k={};SEG.forEach(function(o){if(segM(o)==o.tot)k["s"+o.k]=1});NJ.forEach(function(a,j){if(a.every(function(o){return segM(o)==o.tot}))k["j"+(j+1)]=1});return k}
-function chg(fn){var b=dk();fn();var a=dk(),n=Object.keys(a).filter(function(k){return!b[k]});if(!n.length)return;CEL={};n.forEach(function(k){CEL[k]=1});
-var j=n.filter(function(k){return k.charAt(0)=="j"})[0],t;if(j)t="Juz "+j.slice(1)+" complete, mashaAllah";else{var o=SEG.filter(function(x){return"s"+x.k==n[0]})[0];t=o.name+(o.rng?" "+o.rng:"")+" complete, mashaAllah"}
-try{var e=document.getElementById("toast");e.textContent=t;e.hidden=false;e.style.animation="none";void e.offsetWidth;e.style.animation="";if(navigator.vibrate)navigator.vibrate([20,40,20])}catch(x){}}
-function undo(){var l=D.adds[D.adds.length-1];if(!l||l.d!==TD)return;D.adds.pop();D.mem[l.s]=l.a-1;D.add[TD]=Math.max(0,(D.add[TD]||0)-(l.b-l.a+1));save()}
-function doRow(s,a,b,rc){markRange(s,a,b);D.rev[TD]=(D.rev[TD]||0)+(b-a+1);if(rc)D.rc[s]=TD;tick();save()}
-function plan(){var all=[],g={},rows=[],rec={},sum=0,over=0,i;for(var s=1;s<=114;s++)all=all.concat(blocks(s));
-var rt=D.rev[TD]||0,q=Math.max(10,Math.ceil(total()/D.cfg.cycle)),need=Math.max(0,q-rt);
-var due=all.filter(function(b){return D.rv[bk(b.s,b.i)]!==TD});
-due.forEach(function(b){if(fd(bago(b.s,b.i))=="o")over+=b.b-b.a+1});
-due.sort(function(x,y){return bago(y.s,y.i)-bago(x.s,x.i)});
-for(i=0;i<due.length&&sum<need;i++){var b=due[i];(g[b.s]=g[b.s]||[]).push(b);sum+=b.b-b.a+1}
-Object.keys(g).forEach(function(s){var cur=null;g[s].sort(function(x,y){return x.i-y.i}).forEach(function(b){var o=bago(b.s,b.i);if(cur&&b.i==cur.i+1){cur.i=b.i;cur.b=b.b;cur.old=Math.max(cur.old,o)}else{cur={s:+s,i:b.i,a:b.a,b:b.b,old:o};rows.push(cur)}})});
-rows.sort(function(x,y){return y.old-x.old});
-D.adds.forEach(function(e){var d=T-num(e.d);if(e.d!==TD&&d<=6&&D.rc[e.s]!==TD){var r=rec[e.s]=rec[e.s]||{s:e.s,a:e.a,b:e.b,old:d,rc:1};r.a=Math.min(r.a,e.a);r.b=Math.max(r.b,e.b);r.old=Math.max(r.old,d)}});
-var cus=D.cus.filter(function(c){return c.s==2&&T-num(c.r)>=D.cfg.cycle/2}).slice(0,3);
-return{rows:Object.keys(rec).map(function(k){return rec[k]}).concat(rows),cus:cus,over:over,q:q}}
-function streak(){var n=0,d=new Date();function on(){var k=iso(d);return(D.add[k]||0)>0||(D.rev[k]||0)>0}if(!on())d.setDate(d.getDate()-1);while(on()){n++;d.setDate(d.getDate()-1)}return n}
-function dots(){var h='<div class="dots2">';for(var i=13;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);var k=iso(d);h+='<i class="'+((D.add[k]||D.rev[k])?"on":"")+'"></i>'}return h+'</div>'}
-function msg(P,nt,done){var g=D.cfg.goal,r=g-nt;if(P.over>0)return P.over+" ayat are overdue for revision. Start with the oldest.";if(!D.cur||done)return"Choose the surah you are learning to begin.";if(!nt)return"Even one ayah today counts. Start small.";if(r>0)return r+" more "+(r==1?"ayah":"ayat")+" to reach today’s goal.";return"Today’s goal is done. Revise, then rest."}
-function rvRow(r){return'<div class="row"><i style="background:'+COL[fd(r.old)]+'"></i><div class="t"><span>'+esc(lab(r.s,r.a,r.b))+'</span><small>'+(r.b-r.a+1)+' ayat · '+(r.rc?"Recent lesson":r.old+(r.old==1?" day":" days")+" ago")+'</small></div><button class="b" data-a="rv" data-s="'+r.s+'" data-x="'+r.a+'" data-y="'+r.b+'" data-r="'+(r.rc||0)+'">Done</button></div>'}
+function chg(fn){var b=dk(),n0=D.add[TD]||0;fn();var a=dk(),nw=Object.keys(a).filter(function(k){return!b[k]}),t="";
+if(nw.length){CEL={};nw.forEach(function(k){CEL[k]=1});var j=nw.filter(function(k){return k.charAt(0)=="j"})[0];if(j)t="Juz "+j.slice(1)+" complete, mashaAllah";else{var o=SEG.filter(function(x){return"s"+x.k==nw[0]})[0];t=o.name+(o.rng?" "+o.rng:"")+" complete, mashaAllah"}}
+else if(n0<D.goal&&(D.add[TD]||0)>=D.goal)t="Today’s goal done, mashaAllah";if(t)toast(t)}
 function opts(a,sel){return a.map(function(x){return'<option value="'+x[0]+'"'+(x[0]==sel?" selected":"")+'>'+x[1]+'</option>'}).join("")}
 var SO=NAMES.map(function(n,i){return[i+1,(i+1)+". "+n]});
-function vToday(){var P=plan(),s=D.cur,n=s?mem(s):0,c=s?CNT[s-1]:0,nt=D.add[TD]||0,g=D.cfg.goal,tt=total(),l=D.adds[D.adds.length-1],h;
-h='<div class="stats"><div><b>'+tt.toLocaleString()+'</b><span>ayat memorised</span></div><div><b>'+streak()+'</b><span>day streak</span></div><div><b>'+(tt/ALL*100).toFixed(0)+'%</b><span>of the Qur’an</span></div></div>'+dots()+'<p class="msg">'+esc(msg(P,nt,s&&n>=c))+'</p><h2>LEARN</h2><div class="lc"><select data-a="cur"><option value="0">Choose a surah</option>'+opts(SO,s)+'</select>';
+function ring(n,g){var c=2*Math.PI*34,done=n>=g;return'<svg class="ring'+(done?" ok":"")+'" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="#1a222b" stroke-width="5"/><circle cx="40" cy="40" r="34" fill="none" stroke="'+(done?"#5fbf92":"#a9d3f0")+'" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+(c*(1-Math.min(1,n/g))).toFixed(1)+'" transform="rotate(-90 40 40)" style="--c:'+c.toFixed(1)+'"/><text x="40" y="45" text-anchor="middle" font-size="16" fill="#e4ebf2">'+n+'/'+g+'</text></svg>'}
+function dots(){var h='<div class="dots2">';for(var i=13;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);h+='<i class="'+((D.add[iso(d)]||0)>0?"on":"")+'"></i>'}return h+'</div>'}
+function msg(nt,st){var g=D.goal,r=g-nt;if(!D.cur)return"Choose the surah you are learning.";if(nt<1)return st?"Keep your "+st+"-day streak alive. One ayah is enough.":"Start small. One ayah today counts.";if(r>0)return r+" more "+(r==1?"ayah":"ayat")+" to reach today’s goal.";return"Goal done, mashaAllah. Revise, then rest."}
+function vToday(){var s=D.cur,n=s?mem(s):0,c=s?CNT[s-1]:0,nt=D.add[TD]||0,g=D.goal,st=streak(),l=D.adds[D.adds.length-1],L=revList(),rs=curRev(),h;
+h='<div class="hero">'+ring(nt,g)+'<div><b>'+st+'</b><span>day streak</span></div></div>'+dots()+'<p class="msg">'+esc(msg(nt,st))+'</p><h2>LEARN</h2><div class="lc"><select data-a="cur"><option value="0">Choose a surah</option>'+opts(SO,s)+'</select>';
 if(s){h+='<p class="nm">'+n+' of '+c+' ayat</p><div class="pb"><i style="width:'+n/c*100+'%"></i></div>';
 if(n<c)h+='<small>Next: ayah '+(n+1)+'</small><div class="quick">'+[1,2,3,5].map(function(x){return'<button class="b" data-a="addv" data-n="'+x+'">+'+x+'</button>'}).join("")+(l&&l.d===TD?'<button class="b" data-a="undo">Undo</button>':"")+'</div>';else h+='<small>Surah complete, mashaAllah. Choose your next surah above.</small>'}
-h+='<div class="pb" style="margin-top:16px"><i style="width:'+Math.min(100,nt/g*100)+'%"></i></div><small>Today: '+nt+' of '+g+' new ayat</small></div><h2>REVISE</h2>';
-P.rows.forEach(function(r){h+=rvRow(r)});
-P.cus.forEach(function(c){h+='<div class="row"><i style="background:'+COL[fd(T-num(c.r))]+'"></i><div class="t"><span>'+esc(c.name)+'</span><small>'+esc(c.t)+' · '+(T-num(c.r))+' days ago</small></div><button class="b" data-a="cr" data-k="'+c.k+'">Done</button></div>'});
-if(!P.rows.length&&!P.cus.length)h+='<p class="mut">'+(tt?"All revision done for today.":"Nothing to revise yet.")+'</p>';
-h+='<p class="mut">Revised today: '+(D.rev[TD]||0)+' of about '+P.q+' ayat</p><p class="tip">'+esc(TIPS[Math.floor(T)%TIPS.length])+'</p><h2>PLAN</h2><div class="set"><label>Daily new ayat goal<select data-a="goal">'+opts([1,2,3,5,10,15,20].map(function(x){return[x,x+" ayat"]}),g)+'</select></label><label>Revise everything every<select data-a="cyc">'+opts([14,21,30,45,60].map(function(x){return[x,x+" days"]}),D.cfg.cycle)+'</select></label></div><p><button class="b" data-a="setup">Quick setup</button></p>';
-return h}
-function vMap(){var lg='<div class="legend">'+[["n","Not started"],["f","Fresh"],["d","Due soon"],["o","Needs revision"]].map(function(c){return'<span><i style="background:'+COL[c[0]]+'"></i>'+c[1]+'</span>'}).join("")+'</div>',full=0;
-NJ.forEach(function(a){if(a.every(function(o){return segM(o)==o.tot}))full++});
-var h=lg+'<p class="mut">'+full+' of 30 juz complete · '+total().toLocaleString()+' of '+ALL.toLocaleString()+' ayat. Tap a surah to edit it.</p><div class="jgrid">';
-NJ.forEach(function(a,j){var m=0,t=0;a.forEach(function(o){m+=segM(o);t+=o.tot});var done=m==t,w=worst(a),n=a.length,cols=Math.min(n,Math.ceil(Math.sqrt(n)));
-h+='<div class="jb'+(anim?" in":"")+(done?" full":"")+(CEL["j"+(j+1)]?" cel":"")+'" style="--i:'+j+(done&&(w=="d"||w=="o")?";border-color:"+COL[w]:"")+'"><div class="jh"><b>Juz '+(j+1)+'</b><span>'+(done?"✓":Math.round(m/t*100)+"%")+'</span></div><div class="cg" style="grid-template-columns:repeat('+cols+',1fr)">';
-a.forEach(function(o){var mm=segM(o),w2=worst([o]),bg=mm==o.tot?COL[w2]:mm?"linear-gradient(to top,"+COL[w2]+" "+mm/o.tot*100+"%,#0a0f13 "+mm/o.tot*100+"%)":"";
-h+='<button class="cl'+(mm==o.tot?" f":"")+(D.cur==o.sn?" cur":"")+(CEL["s"+o.k]?" cel":"")+'" data-a="seg" data-k="'+o.k+'"'+(bg?' style="background:'+bg+'"':"")+'>'+o.sn+'</button>'});
-h+='</div></div>'});return h+'</div>'}
-function ser(key){var a=[];for(var i=13;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);a.push([D[key][iso(d)]||0,"SMTWTFS".charAt(d.getDay())])}return a}
-function bars(a,col,goal){var mx=Math.max.apply(null,a.map(function(x){return x[0]}).concat([goal||1])),s="";a.forEach(function(x,i){var h=x[0]/mx*56;s+='<rect x="'+(i*22+6)+'" y="'+(66-h)+'" width="16" height="'+Math.max(h,1)+'" rx="2" fill="'+(x[0]?col:"#1a222b")+'"/><text x="'+(i*22+14)+'" y="80" '+tx+' text-anchor="middle">'+x[1]+'</text>'});
-if(goal){var y=66-goal/mx*56;s+='<line x1="0" x2="320" y1="'+y+'" y2="'+y+'" stroke="#5d6b78" stroke-dasharray="3 3" stroke-width=".7"/>'}return'<svg viewBox="0 0 320 84" width="100%">'+s+'</svg>'}
+h+='</div><h2>REVISE</h2>';
+if(!rs)h+='<p class="mut">Nothing to revise yet.</p>';else{var i=L.indexOf(rs);h+='<div class="lc'+(RA?" slide":"")+'"><p class="nm">'+esc(NAMES[rs-1])+'</p><small>Ayat 1–'+mem(rs)+' · '+(i+1)+' of '+L.length+' · Round '+D.rr+'</small><div class="pb"><i style="width:'+i/L.length*100+'%"></i></div><div class="quick"><button class="b on big" data-a="rd">Done</button></div></div><p class="mut">Revised today: '+(D.rev[TD]||0)+'</p><div class="set"><label>Jump to<select data-a="rsel">'+opts(L.map(function(x){return[x,NAMES[x-1]]}),rs)+'</select></label></div>'}
+return h+'<p class="tip">'+esc(TIPS[Math.floor(T)%TIPS.length])+'</p><h2>DAILY GOAL</h2><div class="step"><button class="b" data-a="gm">−</button><b>'+g+'</b><span>'+(g==1?"ayah":"ayat")+' a day</span><button class="b" data-a="gp">+</button></div><small>Even one ayah keeps your streak going.</small>'}
+function sz(n){return n<=3?46:n<=6?34:n<=12?26:n<=20?22:18}
+function vMap(){var full=0,h="";
+for(var j=29;j>=0;j--){var a=NJ[j],m=0,t=0;a.forEach(function(o){m+=segM(o);t+=o.tot});var done=m==t;if(done)full++;
+h+='<div class="jb'+(anim?" in":"")+(done?" full":"")+(CEL["j"+(j+1)]?" cel":"")+'" style="--i:'+(29-j)+';--c:'+sz(a.length)+'px"><div class="jh"><b>Juz '+(j+1)+'</b><span>'+(done?"✓":Math.round(m/t*100)+"%")+'</span></div><div class="cg">';
+a.forEach(function(o){var mm=segM(o),p=mm/o.tot*100,part=mm>0&&mm<o.tot;h+='<button class="cl'+(mm==o.tot?" f":part?" p":"")+(D.cur==o.sn?" cur":"")+(CEL["s"+o.k]?" cel":"")+'" data-a="seg" data-k="'+o.k+'"'+(part?' style="background:linear-gradient(to top,#3b6f93 '+p+'%,#0a0f13 '+p+'%)"':"")+'>'+o.sn+'</button>'});
+h+='</div></div>'}
+return'<p class="mut">'+full+' of 30 juz complete · '+total().toLocaleString()+' of '+ALL.toLocaleString()+' ayat. Tap a surah to edit it.</p><div class="jgrid">'+h+'</div>'}
 function dl(x){return new Date(x*864e5).toLocaleDateString(undefined,{day:"numeric",month:"short",timeZone:"UTC"})}
-function vProg(){var tt=total(),ev=Object.keys(D.add).filter(function(k){return D.add[k]>0}).sort(),sa=0,W=320,H=120;ev.forEach(function(k){sa+=D.add[k]});
+function vProg(){var tt=total(),ev=Object.keys(D.add).filter(function(k){return D.add[k]>0}).sort(),sa=0,W=320,H=120,i,j,k;ev.forEach(function(k){sa+=D.add[k]});
 var c=tt-sa,st=c,x0=ev.length?num(ev[0]):T-1,x1=Math.max(T,x0+1),pts=[[0,c]];ev.forEach(function(k){c+=D.add[k];pts.push([(num(k)-x0)/(x1-x0),c])});pts.push([1,c]);
 var y0=Math.max(0,Math.floor(st/10)*10),y1=Math.max(y0+10,Math.ceil(c/10)*10),P=pts.map(function(p){return(30+p[0]*(W-36)).toFixed(1)+","+(H-16-(p[1]-y0)/(y1-y0)*(H-26)).toFixed(1)}).join(" ");
-var h='<h2>AYAT MEMORISED</h2><p class="msg">'+tt.toLocaleString()+' of '+ALL.toLocaleString()+' ayat ('+(tt/ALL*100).toFixed(1)+'%)</p><svg viewBox="0 0 '+W+' '+(H+4)+'" width="100%"><polygon points="30,'+(H-16)+' '+P+' '+(W-6)+','+(H-16)+'" fill="#a9d3f0" opacity=".1"/><polyline points="'+P+'" fill="none" stroke="#a9d3f0" stroke-width="1.6" stroke-linejoin="round"/><text x="0" y="14" '+tx+'>'+y1+'</text><text x="0" y="'+(H-14)+'" '+tx+'>'+y0+'</text><text x="30" y="'+(H+2)+'" '+tx+'>'+dl(x0)+'</text><text x="'+(W-6)+'" y="'+(H+2)+'" '+tx+' text-anchor="end">Today</text></svg>';
-var r30=0;ev.forEach(function(k){if(T-num(k)<=30)r30+=D.add[k]});
-if(r30>0){var dy=(ALL-tt)/(r30/30);h+='<p class="mut">At your pace over the last 30 days ('+(r30/30).toFixed(1)+' ayat a day): about '+(dy<700?Math.max(1,Math.round(dy/30))+" months":(dy/365).toFixed(1)+" years")+' to finish.</p>'}
-var wn=0,wr=0;for(var i=0;i<7;i++){var d=new Date();d.setDate(d.getDate()-i);wn+=D.add[iso(d)]||0;wr+=D.rev[iso(d)]||0}
-h+='<h2>NEW AYAT PER DAY</h2>'+bars(ser("add"),"#a9d3f0",D.cfg.goal)+'<p class="mut">'+wn+' new ayat this week</p><h2>AYAT REVISED PER DAY</h2>'+bars(ser("rev"),"#5fbf92")+'<p class="mut">'+wr+' ayat revised this week</p>';
-var jb="";for(var j=1;j<=30;j++){var m=0,t=0;NJ[j-1].forEach(function(o){m+=segM(o);t+=o.tot});var x=(j-1)*10.5+3,hh=m/t*60;jb+='<rect x="'+x+'" y="4" width="8" height="60" rx="2" fill="#1a222b"/><rect x="'+x+'" y="'+(64-hh)+'" width="8" height="'+hh+'" rx="2" fill="#5fbf92"/>';if(j==1||j%5==0)jb+='<text x="'+(x+4)+'" y="76" '+tx+' text-anchor="middle">'+j+'</text>'}
-return h+'<h2>EACH JUZ (BY AYAT)</h2><svg viewBox="0 0 320 80" width="100%">'+jb+'</svg>'}
-function vOth(){var h='<p class="mut">Add hadith, duas, prose or poems. They join your revision once they are memorised.</p><div class="add"><input id="cn" placeholder="e.g. Hadith of intentions" autocomplete="off"><select id="ct">'+["Hadith","Dua","Prose","Poem","Other"].map(function(t){return"<option>"+t+"</option>"}).join("")+'</select><button class="b" data-a="addc">Add</button></div>';
-D.cus.forEach(function(c){h+='<div class="row"><i style="background:'+(c.s==2?COL[fd(T-num(c.r))]:"#5d86a3")+'"></i><div class="t"><span>'+esc(c.name)+'</span><small>'+esc(c.t)+' · '+(c.s==2?"Memorised · revised "+(T-num(c.r))+"d ago":"Learning")+'</small></div>'+(c.s==2?'<button class="b" data-a="cr" data-k="'+c.k+'">Revised</button>':'<button class="b" data-a="cm" data-k="'+c.k+'">Memorised</button>')+'<button class="b" data-a="cd" data-k="'+c.k+'">×</button></div>'});return h}
+var h='<p class="msg">'+tt.toLocaleString()+' of '+ALL.toLocaleString()+' ayat · '+(tt/ALL*100).toFixed(1)+'%</p><h2>TOTAL AYAT MEMORISED</h2><svg viewBox="0 0 '+W+' '+(H+4)+'" width="100%"><polygon points="30,'+(H-16)+' '+P+' '+(W-6)+','+(H-16)+'" fill="#a9d3f0" opacity=".1"/><polyline points="'+P+'" fill="none" stroke="#a9d3f0" stroke-width="1.6" stroke-linejoin="round"/><text x="0" y="14" '+tx+'>'+y1+'</text><text x="0" y="'+(H-14)+'" '+tx+'>'+y0+'</text><text x="30" y="'+(H+2)+'" '+tx+'>'+dl(x0)+'</text><text x="'+(W-6)+'" y="'+(H+2)+'" '+tx+' text-anchor="end">Today</text></svg>';
+var arr=[],ma=[],mx=Math.max(D.goal,1);for(i=36;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);arr.push(D.add[iso(d)]||0)}
+for(k=7;k<37;k++){var t=0;for(j=k-6;j<=k;j++)t+=arr[j];ma.push(t/7);mx=Math.max(mx,arr[k],t/7)}
+var bars="",line=[],w7=0,a30=0,best=0;for(k=0;k<30;k++){var v=arr[k+7],hh=v/mx*56;a30+=v;best=Math.max(best,v);if(k>=23)w7+=v;bars+='<rect x="'+(k*10.4+2)+'" y="'+(66-hh)+'" width="8" height="'+Math.max(hh,1)+'" rx="2" fill="'+(v?"#a9d3f0":"#1a222b")+'"/>';line.push((k*10.4+6).toFixed(1)+","+(66-ma[k]/mx*56).toFixed(1))}
+var gy=66-D.goal/mx*56;
+h+='<h2>NEW AYAT PER DAY, WITH 7-DAY TREND</h2><svg viewBox="0 0 320 84" width="100%">'+bars+'<line x1="0" x2="320" y1="'+gy+'" y2="'+gy+'" stroke="#5d6b78" stroke-dasharray="3 3" stroke-width=".7"/><polyline points="'+line.join(" ")+'" fill="none" stroke="#5fbf92" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><text x="2" y="80" '+tx+'>30 days ago</text><text x="314" y="80" '+tx+' text-anchor="end">Today</text></svg><p class="mut">Last 7 days: '+w7+' ayat ('+(w7/7).toFixed(1)+' a day) · last 30 days: '+a30+' · best day: '+best+'. The green line is your 7-day average and the dashed line is your goal.</p>';
+if(a30>0){var dy=(ALL-tt)/(a30/30);h+='<p class="mut">At this pace: about '+(dy<700?Math.max(1,Math.round(dy/30))+" months":(dy/365).toFixed(1)+" years")+' to finish.</p>'}
+return h}
 function vSheet(k){var o=SEG.filter(function(x){return x.k==k})[0];if(!o)return"";var n=mem(o.sn),m=segM(o),c="";
-for(var a=o.st;a<=o.en;a++){var f=a<=n;c+='<button class="ac'+(f?" f":"")+(a==n+1?" nx":"")+'" data-a="ay" data-s="'+o.sn+'" data-k="'+a+'"'+(f?' style="background:'+COL[fd(bago(o.sn,Math.floor((a-1)/BS)))]+'"':"")+'>'+a+'</button>'}
-return'<div class="card" data-a="noop"><h3>'+esc(o.name)+(o.rng?" "+o.rng:"")+'</h3><small>'+m+' of '+o.tot+' ayat in this part · '+n+' of '+CNT[o.sn-1]+' in the surah</small><div class="ay">'+c+'</div><small>Tap an ayah to mark everything up to it as memorised. Tap the last filled one again to undo it. The outlined square is your next ayah.</small><div class="seg3"><label class="mut">Memorised up to ayah <input class="num" id="sn" type="number" inputmode="numeric" min="0" max="'+CNT[o.sn-1]+'" value="'+n+'"></label><button class="b on" data-a="save" data-s="'+o.sn+'">Save</button></div>'+(m?'<button class="b" data-a="srev" data-k="'+o.k+'">Revised today</button> ':"")+'<button class="b" data-a="scur" data-s="'+o.sn+'">Learn this surah</button> <button class="b" data-a="close">Close</button></div>'}
-function applySetup(){var E=SU.f?(JS[SU.f]?gv(JS[SU.f][0],JS[SU.f][1])-1:ALL):0,fr=[],bkk=[],L=[],s;
-for(s=1;s<=114;s++){var c0=CUM[s-1],fm=E>c0?Math.min(CNT[s-1],E-c0):0,bm=s>=SU.b?CNT[s-1]:0,n=Math.max(mem(s),fm,bm);if(n>mem(s)){D.mem[s]=n;(fm>=bm?fr:bkk).push(s)}}
-bkk.reverse();fr.concat(bkk).forEach(function(s){blocks(s).forEach(function(b){if(!D.rv[bk(b.s,b.i)])L.push(b)})});
-var cm=Math.min(SU.c||0,SU.l?CNT[SU.l-1]:0);if(SU.l){D.cur=SU.l;if(cm>mem(SU.l)){D.mem[SU.l]=cm;blocks(SU.l).forEach(function(b){if(!D.rv[bk(b.s,b.i)])L.push(b)})}}
-L.forEach(function(b,i){var d=new Date();d.setDate(d.getDate()-Math.floor(D.cfg.cycle*.95*(1-i/L.length)));D.rv[bk(b.s,b.i)]=iso(d)});save()}
-function vSetup(){var f=[[0,"None"]].concat(NJ.map(function(x,i){return[i+1,"Juz "+(i+1)]})),b=[[115,"None"]].concat(SO.slice().reverse()),l=[[0,"Nothing"]].concat(SO);
-return'<div class="top"><button class="b" data-a="sback">← Back</button></div><h2>QUICK SETUP</h2><p class="mut">Tell the app what you already know. It only adds progress and never removes any. Revision dates are estimated, so fix them later by tapping a section on the map.</p><div class="set"><label>Memorised from the start through<select data-a="sf">'+opts(f,SU.f)+'</select></label><label>Memorised from An-Nas back to<select data-a="sb">'+opts(b,SU.b)+'</select></label><label>Currently learning<select data-a="sl">'+opts(l,SU.l)+'</select></label><label>Ayat of that surah already memorised<input class="num" id="sc" type="number" inputmode="numeric" min="0" value="'+SU.c+'"></label></div><p><button class="b on" data-a="apply">Apply</button></p>'}
-function render(){document.getElementById("tabs").innerHTML=[["today","Today"],["map","Map"],["prog","Progress"],["oth","Other"]].map(function(t){return'<button data-a="tab" data-k="'+t[0]+'" class="'+(tab==t[0]?"on":"")+'">'+t[1]+'</button>'}).join("");
-document.getElementById("v").innerHTML=(tab=="today"&&su?vSetup:({today:vToday,map:vMap,prog:vProg,oth:vOth})[tab])();
-var sh=document.getElementById("sh"),old=sh.firstElementChild,st=old?old.scrollTop:0;sh.hidden=!sk;sh.innerHTML=sk?vSheet(sk):"";var nw=sh.firstElementChild;if(nw&&st)nw.scrollTop=st;anim=0;CEL={}}
-function addC(){var i=document.getElementById("cn"),v=i&&i.value.trim();if(!v)return;D.cus.push({k:"c"+Date.now(),name:v,t:document.getElementById("ct").value,s:1});save();render()}
-function cu(k){return D.cus.filter(function(c){return c.k==k})[0]}
+for(var a=o.st;a<=o.en;a++)c+='<button class="ac'+(a<=n?" f":"")+(a==n+1?" nx":"")+'" data-a="ay" data-s="'+o.sn+'" data-k="'+a+'">'+a+'</button>';
+return'<div class="card" data-a="noop"><h3>'+esc(o.name)+(o.rng?" "+o.rng:"")+'</h3><small>'+m+' of '+o.tot+' ayat memorised</small><div class="ay">'+c+'</div><small>Tap an ayah to mark everything up to it as memorised. Tap the last filled one again to undo it. The outlined square is your next ayah.</small><div class="seg3"><label class="mut">Memorised up to ayah <input class="num" id="sn" type="number" inputmode="numeric" min="0" max="'+CNT[o.sn-1]+'" value="'+n+'"></label><button class="b on" data-a="save" data-s="'+o.sn+'">Save</button></div><button class="b" data-a="scur" data-s="'+o.sn+'">Learn this surah</button> '+(revList().indexOf(o.sn)>-1?'<button class="b" data-a="rnow" data-s="'+o.sn+'">Revise this next</button> ':"")+'<button class="b" data-a="close">Close</button></div>'}
+function render(){document.getElementById("tabs").innerHTML=[["today","Today"],["map","Map"],["prog","Progress"]].map(function(t){return'<button data-a="tab" data-k="'+t[0]+'" class="'+(tab==t[0]?"on":"")+'">'+t[1]+'</button>'}).join("");
+document.getElementById("v").innerHTML=({today:vToday,map:vMap,prog:vProg})[tab]();
+var sh=document.getElementById("sh"),old=sh.firstElementChild,st=old?old.scrollTop:0;sh.hidden=!sk;sh.innerHTML=sk?vSheet(sk):"";var nw=sh.firstElementChild;if(nw&&st)nw.scrollTop=st;anim=0;CEL={};RA=0}
 document.addEventListener("click",function(e){if(/^(SELECT|INPUT|OPTION)$/.test(e.target.tagName))return;var t=e.target.closest("[data-a]");if(!t)return;var a=t.dataset.a,k=t.dataset.k,d=t.dataset;
 if(a=="noop")return;
 if(a=="tab"){tab=k;anim=(k=="map")}else if(a=="seg")sk=k;else if(a=="close")sk=null;
-else if(a=="addv")chg(function(){addV(+d.n)});else if(a=="undo")undo();else if(a=="rv")doRow(+d.s,+d.x,+d.y,+d.r);
-else if(a=="srev"){var o=SEG.filter(function(x){return x.k==k})[0];doRow(o.sn,o.st,o.st+segM(o)-1);sk=null}
-else if(a=="save"){var s1=+d.s,v1=Math.max(0,Math.min(CNT[s1-1],+document.getElementById("sn").value||0));chg(function(){setMem(s1,v1)});sk=null}else if(a=="ay"){var s2=+d.s,a2=+k,pm=mem(s2);chg(function(){setMem(s2,a2==pm?a2-1:a2)})}
+else if(a=="addv"){buzz(10);chg(function(){addV(+d.n)})}else if(a=="undo")undo();
+else if(a=="rd"){buzz(14);var w=revDone();RA=1;if(w)toast("Round complete, mashaAllah")}
+else if(a=="gm")D.goal=Math.max(1,D.goal-1),save();else if(a=="gp")D.goal=Math.min(50,D.goal+1),save();
+else if(a=="save"){var s1=+d.s,v1=Math.max(0,Math.min(CNT[s1-1],+document.getElementById("sn").value||0));chg(function(){setMem(s1,v1)});sk=null}
+else if(a=="ay"){var s2=+d.s,a2=+k,pm=mem(s2);chg(function(){setMem(s2,a2==pm?a2-1:a2)})}
 else if(a=="scur"){D.cur=+d.s;save();sk=null;tab="today"}
-else if(a=="setup")su=1;else if(a=="sback")su=0;else if(a=="apply"){SU.c=+document.getElementById("sc").value||0;applySetup();su=0;tab="today"}
-else if(a=="addc"){addC();return}else if(a=="cm"){var c=cu(k);c.s=2;c.m=TD;c.r=TD;tick();save()}else if(a=="cr"){cu(k).r=TD;tick();save()}else if(a=="cd"){D.cus=D.cus.filter(function(c){return c.k!=k});save()}
+else if(a=="rnow"){D.rp=+d.s;save();sk=null;tab="today";RA=1}
 render()});
-document.addEventListener("change",function(e){var a=e.target.dataset&&e.target.dataset.a,v=+e.target.value;
-if(a=="sf")SU.f=v;else if(a=="sb")SU.b=v;else if(a=="sl")SU.l=v;else if(a=="cur"){D.cur=v;save();render()}else if(a=="goal"){D.cfg.goal=v;save();render()}else if(a=="cyc"){D.cfg.cycle=v;save();render()}});
-document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.id==="cn")addC()});
+document.addEventListener("change",function(e){var a=e.target.dataset&&e.target.dataset.a,v=+e.target.value;if(a=="cur"){D.cur=v;save();render()}else if(a=="rsel"){D.rp=v;save();RA=1;render()}});
 document.getElementById("date").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"});
-render();
+if(!D.init)seed();mirror();render();
 </script>
 </body>
 </html>

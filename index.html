@@ -91,6 +91,7 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="rem" id="rem" hidden><p class="remt">Reminders</p><div class="times" id="times"></div><div class="rbtns"><button id="rtog"></button><button id="rtest" hidden>Send test</button></div><p class="rs" id="rs"></p></div>
 <button class="edit" id="edit">Edit habits</button>
 </main>
+<script src="config.js"></script>
 <script>
 var QUOTES=[
 ["The most beloved deeds to Allah are the consistent ones, even if small.","Sahih al-Bukhari & Muslim"],
@@ -160,8 +161,8 @@ document.getElementById("edit").textContent=editing?"Done":"Edit habits";
 function add(){var i=document.getElementById("in"),v=i.value.trim();if(!v)return;habits.push({id:"h"+Date.now(),name:v,g:"Yours"});i.value="";sv();render();i.focus()}
 document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
 document.getElementById("edit").onclick=function(){editing=!editing;render()};
-var API="https://istiqamah-push.arafatrouf123.workers.dev/",RKEY="rem-v1";
-var rem=ld(RKEY,{on:false,times:["06:30","13:00","21:00"]});
+var API=window.WORKER_URL||"PUT_YOUR_WORKER_URL_HERE",RKEY="rem-v2";
+var rem=ld(RKEY,{on:false,times:["08:30","13:30","17:30"]});
 function mirror(){try{var r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put({habits:habits,log:log},"state")}catch(e){}}}catch(e){}}
 function rsay(t){document.getElementById("rs").textContent=t}
 function u8(s){var p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
