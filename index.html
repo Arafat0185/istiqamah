@@ -222,6 +222,36 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 #hz .wa2{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.92rem}
 #hz .b.ok{background:var(--green);border-color:var(--green);color:#0a0d11}
 .bta{width:100%;font:inherit;font-size:.85rem;color:var(--ink);background:#0d1217;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:10px;color-scheme:dark}
+
+#pr h1{font-weight:200;font-size:2.4rem;letter-spacing:-.03em;margin:0 0 20px}
+#pr h2{font-weight:300;font-size:.8rem;color:var(--muted);letter-spacing:.06em;margin:28px 0 10px}
+#pr .nx{border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 18px}
+#pr small,#pr .mut{color:var(--muted);font-size:.8rem}
+#pr .mut{margin:10px 0}
+#pr .nx b{display:block;font-weight:200;font-size:2.4rem;line-height:1.15;color:var(--ice)}
+#pr .cd{font-size:1.05rem}
+#pr .bar2{height:3px;background:var(--line);border-radius:2px;margin:14px 0 8px}
+#pr .bar2 i{display:block;height:100%;background:var(--ice);border-radius:2px;transition:width .5s}
+#pr .fr{margin:8px 0 0;font-size:.95rem}
+#pr table{width:100%;border-collapse:collapse;margin-bottom:6px}
+#pr th,#pr td{padding:13px 0;border-bottom:1px solid var(--line);text-align:right;font-weight:300}
+#pr th{font-size:.72rem;color:var(--muted);letter-spacing:.05em}
+#pr th:first-child,#pr td:first-child{text-align:left}
+#pr tr.cur td{color:var(--ice)}
+#pr tr.past td{color:var(--muted)}
+#pr a.lk{color:var(--ice);font-size:.9rem;text-decoration:none}
+#pr .b{border:1px solid var(--line);background:none;color:var(--ice);font:inherit;font-size:.9rem;padding:9px 16px;border-radius:999px;cursor:pointer;transition:transform .15s}
+#pr .b.on{background:var(--ice);color:var(--bg);border-color:var(--ice)}
+#pr .b:active{transform:scale(.94)}
+#pr .b[hidden]{display:none}
+#pr .quick{display:flex;gap:8px;flex-wrap:wrap}
+#pr .lc{border:1px solid var(--line);border-radius:16px;padding:18px}
+#pr label.sw{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:.95rem;flex-wrap:wrap}
+#pr label.sw span{flex:1;min-width:120px}
+#pr input[type=checkbox]{width:20px;height:20px;accent-color:var(--ice);flex:none}
+#pr input[type=time]{font:inherit;font-size:.9rem;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:4px 2px;color-scheme:dark;width:92px}
+#pr .tms{display:flex;gap:8px;flex-wrap:wrap;flex:none}
+#pr .nmsg{white-space:pre-line;color:var(--muted);font-size:.82rem;margin:14px 0 0}
 </style>
 </head>
 <body>
@@ -234,8 +264,7 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="bar" id="bar"><i id="pb"></i></div>
 <ul id="list"></ul>
 <div class="add" id="addw" hidden><input id="in" placeholder="Add a habit" aria-label="New habit" autocomplete="off" enterkeyhint="done"></div>
-<div class="rem" id="rem" hidden><p class="remt">Reminders</p><div class="times" id="times"></div><div class="rbtns"><button id="rtog"></button><button id="rtest" hidden>Send test</button><button id="rchk">Check</button></div><p class="rs" id="rs"></p>
-<p class="remt" style="margin-top:28px">Backup</p><div class="rbtns"><button id="bon">Turn on cloud backup</button><button id="bnow" hidden>Back up now</button><button id="bshow" hidden>Show my code</button><button id="bcopy">Copy backup</button></div><p class="rs" id="bs"></p>
+<div class="rem" id="rem" hidden><p class="remt" style="margin-top:28px">Backup</p><div class="rbtns"><button id="bon">Turn on cloud backup</button><button id="bnow" hidden>Back up now</button><button id="bshow" hidden>Show my code</button><button id="bcopy">Copy backup</button></div><p class="rs" id="bs"></p>
 <textarea id="brest" class="bta" rows="2" placeholder="To restore, paste your sync code or a copied backup here"></textarea><div class="rbtns"><button id="brestore">Restore</button></div></div>
 <button class="edit" id="edit">Edit habits</button>
 </div>
@@ -247,14 +276,21 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 <div class="sheet" id="sh" data-a="close" hidden></div>
 <div class="toast" id="toast" hidden></div>
 </div>
+<div id="pr" hidden>
+<p class="date" id="pdate"></p>
+<h1>Prayer</h1>
+<div id="prtop"></div>
+<div id="prnot"></div>
+</div>
 <div id="rf" hidden>
 <p class="date" id="rdate"></p>
 <h1>Reflect</h1>
 <div id="rfv"></div>
 </div>
 </main>
-<nav class="nav" id="nav"><button data-t="habits" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>Habits</button><button data-t="hifz"><svg viewBox="0 0 24 24"><path d="M3.5 6c3-1.2 5.5-.8 8.5 1 3-1.8 5.5-2.2 8.5-1v12c-3-1.2-5.5-.8-8.5 1-3-1.8-5.5-2.2-8.5-1z"/><path d="M12 7v12"/></svg>Hifz</button><button data-t="reflect"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Reflect</button></nav>
+<nav class="nav" id="nav"><button data-t="habits" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.8 2.8L16 9.5"/></svg>Habits</button><button data-t="hifz"><svg viewBox="0 0 24 24"><path d="M3.5 6c3-1.2 5.5-.8 8.5 1 3-1.8 5.5-2.2 8.5-1v12c-3-1.2-5.5-.8-8.5 1-3-1.8-5.5-2.2-8.5-1z"/><path d="M12 7v12"/></svg>Hifz</button><button data-t="prayer"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>Prayer</button><button data-t="reflect"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>Reflect</button></nav>
 <script src="config.js"></script>
+<script src="prayer.js"></script>
 <script>(function(){
 var QUOTES=[
 ["The most beloved deeds to Allah are the consistent ones, even if small.","Sahih al-Bukhari & Muslim"],
@@ -324,43 +360,7 @@ document.getElementById("edit").textContent=editing?"Done":"Edit habits";
 function add(){var i=document.getElementById("in"),v=i.value.trim();if(!v)return;habits.push({id:"h"+Date.now(),name:v,g:"Yours"});i.value="";sv();render();i.focus()}
 document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
 document.getElementById("edit").onclick=function(){editing=!editing;render()};
-var API=(window.WORKER_URL||"PUT_YOUR_WORKER_URL_HERE").trim().replace(/\/+$/,""),RKEY="rem-v2";
-var rem=ld(RKEY,{on:false,times:["08:30","13:30","17:30"]});
-function mirror(){try{var r=indexedDB.open("ist",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){try{r.result.transaction("kv","readwrite").objectStore("kv").put({habits:habits,log:log},"state")}catch(e){}}}catch(e){}}
-function rsay(t){document.getElementById("rs").textContent=t}
-function u8(s){var p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
-function post(path,body){return fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)})}
-function saveRem(){try{localStorage.setItem(RKEY,JSON.stringify(rem))}catch(e){}}
-async function getSub(){var reg=await navigator.serviceWorker.ready;return reg.pushManager.getSubscription()}
-async function syncRem(){var s=await getSub();if(s)await post("/subscribe",{sub:s.toJSON(),times:rem.times,tz:Intl.DateTimeFormat().resolvedOptions().timeZone})}
-async function turnOn(){
-if(API.indexOf("PUT_YOUR")>-1){rsay("Add your Worker URL to index.html first.");return}
-if(!("PushManager" in window)){rsay("Open the app from its Home Screen icon first (Share, Add to Home Screen).");return}
-try{var perm=await Notification.requestPermission();
-if(perm!=="granted"){rsay("Notifications are blocked. Allow them in iPhone Settings.");return}
-var reg=await navigator.serviceWorker.ready,key=await(await fetch(API+"/key")).text();
-var s=await reg.pushManager.getSubscription()||await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(key.trim())});
-rem.on=true;saveRem();await syncRem();rsay("Reminders are on.")}catch(e){rsay("Could not turn on reminders: "+e.message)}
-drawRem()}
-async function turnOff(){try{var s=await getSub();if(s){await post("/unsubscribe",{sub:s.toJSON()});await s.unsubscribe()}}catch(e){}rem.on=false;saveRem();rsay("Reminders are off.");drawRem()}
-function drawRem(){var t=document.getElementById("times");t.innerHTML="";
-rem.times.forEach(function(v,i){var inp=document.createElement("input");inp.type="time";inp.value=v;inp.setAttribute("aria-label","Reminder time "+(i+1));
-inp.onchange=function(){rem.times[i]=inp.value||v;saveRem();if(rem.on)syncRem().then(function(){rsay("Times saved.")}).catch(function(){})};t.appendChild(inp)});
-document.getElementById("rtog").textContent=rem.on?"Turn off reminders":"Turn on reminders";
-document.getElementById("rtest").hidden=!rem.on}
-document.getElementById("rtog").onclick=function(){rem.on?turnOff():turnOn()};
-document.getElementById("rtest").onclick=async function(){try{var s=await getSub();if(!s){rsay("Not subscribed yet. Tap Turn on reminders.");return}var r=await post("/test",{sub:s.toJSON()}),t=await r.text(),j={};try{j=JSON.parse(t)}catch(e){j={status:t}}
-rsay(j.status==201||j.status==200?"Test sent. It should arrive within a few seconds.":"Test failed. The push service replied "+j.status+(j.body?": "+j.body:"")+". Please tell me this message.")}catch(e){rsay("Test failed: "+e.message)}};
-document.getElementById("rchk").onclick=async function(){var L=[];
-L.push("Home Screen app: "+((navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches))?"yes":"no, open it from the Home Screen icon"));
-L.push("Notifications: "+("Notification" in window?Notification.permission:"not available here"));
-if(API.indexOf("PUT_YOUR")>-1)L.push("Worker address: missing, edit config.js");else{L.push("Worker address: set");
-try{var r=await fetch(API+"/health"),t=await r.text(),j=null;try{j=JSON.parse(t)}catch(e){}
-if(!j)L.push("Worker replied: "+t.slice(0,70).replace(/\s+/g," ")+(/Istiqamah push/.test(t)?" (old code, or a different Worker from the one you edited)":""));else{L.push("Worker: reachable, "+j.subs+" device(s) subscribed");L.push("Timer last ran: "+(j.cron?new Date(j.cron).toLocaleString():"never, add the cron trigger"));L.push("Last send: "+(j.last?j.last.sent+" sent, replies "+j.last.codes.join(",")+" at "+new Date(j.last.t).toLocaleTimeString():"none yet"))}}catch(e){L.push("Worker: unreachable, check the address")}}
-try{L.push("This device subscribed: "+(await getSub()?"yes":"no"))}catch(e){L.push("This device subscribed: unknown")}
-rsay(L.join("\n"))};
-if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
-drawRem();mirror();
+function mirror(){}
 render();
 ;window.hbRefresh=function(){log=ld(LKEY,{});habits=ld(HKEY,habits);render()};
 })();</script>
@@ -477,6 +477,78 @@ document.addEventListener("input",function(e){if(e.target.id=="wa")WD=e.target.v
 mirror();render();window.hzRefresh=render;
 })();</script>
 <script>(function(){
+var E=window.ELM||{y:0,d:{}},API=(window.WORKER_URL||"").trim().replace(/\/+$/,""),ok=API&&API.indexOf("PUT_YOUR")<0;
+function $(i){return document.getElementById(i)}
+function p2(n){return("0"+n).slice(-2)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+var DEF={on:0,pr:{fajr:1,zuhr:1,asr:1,maghrib:1,isha:1},gh:1,kf:1,kt:"09:00",mv:1,mt:["08:30","13:30","17:30"],ms:2};
+var N=ld("notif-v2",{}),msg="";Object.keys(DEF).forEach(function(k){if(N[k]==null)N[k]=JSON.parse(JSON.stringify(DEF[k]))});
+function sv(){try{localStorage.setItem("notif-v2",JSON.stringify(N))}catch(e){}}
+var PR=[["fajr","Fajr"],["zuhr","Zuhr"],["asr","Asr"],["maghrib","Maghrib"],["isha","Isha"]],ORD=[["fajr","Fajr"],["sunrise","Sunrise"],["zuhr","Zuhr"],["asr","Asr"],["maghrib","Maghrib"],["isha","Isha"]];
+var BANK=[["Qur’an 94:6","Indeed, with hardship comes ease."],["Qur’an 2:152","Remember Me, and I will remember you."],["Qur’an 13:28","Verily, in the remembrance of Allah do hearts find rest."],["Qur’an 2:153","Indeed, Allah is with the patient."],["Qur’an 54:17","We have made the Qur’an easy to remember. Is there anyone who will remember?"],["Qur’an 65:3","And whoever relies upon Allah, He is sufficient for them."],["Qur’an 29:69","Those who strive for Us, We will surely guide them to Our ways."],["Qur’an 2:286","Allah does not burden a soul beyond what it can bear."],["Qur’an 20:114","My Lord, increase me in knowledge."],["Qur’an 39:53","Do not despair of the mercy of Allah."],["Qur’an 3:139","Do not lose heart and do not grieve."],["Bukhari & Muslim","The most beloved deeds to Allah are the consistent ones, even if small."],["Bukhari","The best of you are those who learn the Qur’an and teach it."],["Bukhari & Muslim","Whoever finds the Qur’an difficult to recite, and struggles with it, will have two rewards."],["Bukhari & Muslim","Keep refreshing the Qur’an. It slips away faster than a camel from its rope."],["Tirmidhi","Every letter of the Qur’an you recite is a good deed, and each good deed is multiplied by ten."],["Abu Dawud","It will be said to the companion of the Qur’an: Recite and rise, as you used to recite in the world."],["Muslim","Whoever walks a path seeking knowledge, Allah makes easy for him a path to Paradise."],["Bukhari","Two blessings many people lose: health and free time."],["One ayah","Even one ayah today keeps your streak alive."],["Small steps","Small and steady beats big and rare."],["Revise first","Strong revision makes new ayat stick."],["Begin","Say bismillah and open the mushaf. That is the hardest part."],["Today","What you learn today is a gift to your future self."],["Consistency","You do not need motivation. You need to start."],["Before sleep","Recite your lesson once more before you sleep."],["Keep going","Every ayah you carry is yours forever, inshaAllah."],["Stay close","The Qur’an rewards the one who keeps returning."]];
+function f12(m){var h=Math.floor(m/60)%24;return(h%12||12)+":"+p2(m%60)+" "+(h>=12?"pm":"am")}
+function hm(s){var a=String(s).split(":");return(+a[0]||0)*60+(+a[1]||0)}
+function day(d){if(d.getFullYear()!=E.y)return null;var r=E.d[p2(d.getMonth()+1)+"-"+p2(d.getDate())];if(!r)return null;return{fajr:[r[0],r[1]],sunrise:[r[2]],zuhr:[r[3],r[4]],asr:[N.ms==1?r[5]:r[6],r[7]],maghrib:[r[8],r[9]],isha:[r[10],r[11]]}}
+function at(d,m){return new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,m)}
+function seq(d){var T=day(d),o=[];if(!T)return o;ORD.forEach(function(p){var x=T[p[0]];o.push({k:p[0],n:p[1],t:at(d,x[0]),b:x[0],j:x[1]})});return o}
+function cd(ms){var m=Math.max(0,Math.round(ms/60000)),h=Math.floor(m/60);return h?h+"h "+(m%60)+"m":m+"m"}
+function state(){var n=new Date(),y=new Date(n.getFullYear(),n.getMonth(),n.getDate()-1),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),prev=null,next=null;seq(y).concat(seq(n),seq(t)).forEach(function(e){if(e.t<=n)prev=e;else if(!next)next=e});return{now:n,prev:prev,next:next}}
+function top(){var now=new Date(),T=day(now),S=state(),h="";
+if(!T)return'<p class="mut">The timetable file only covers '+E.y+'. Times for today are not loaded yet.</p>';
+if(S.next){var nx=S.next,pct=S.prev?Math.min(100,Math.max(0,(now-S.prev.t)/(nx.t-S.prev.t)*100)):0;h+='<div class="nx"><small>NEXT</small><b>'+nx.n+'</b><span class="cd">in '+cd(nx.t-now)+'</span><div class="bar2"><i style="width:'+pct.toFixed(1)+'%"></i></div><small>'+f12(nx.b)+(nx.j?" · Jamā‘ah "+f12(nx.j):"")+'</small></div>'}
+h+='<table><tr><th></th><th>BEGINS</th><th>JAMĀ‘AH</th></tr>'+ORD.map(function(p){var x=T[p[0]],cur=S.prev&&S.prev.k==p[0]&&S.prev.t.toDateString()==now.toDateString(),cls=cur?"cur":at(now,x[0])<=now?"past":"";return'<tr class="'+cls+'"><td>'+p[1]+'</td><td>'+f12(x[0])+'</td><td>'+(x[1]?f12(x[1]):"")+'</td></tr>'}).join("")+'</table>';
+h+='<div class="quick" style="margin:12px 0 4px"><button class="b'+(N.ms==2?" on":"")+'" data-p="ms2">Asr: 2 Mithl</button><button class="b'+(N.ms==1?" on":"")+'" data-p="ms1">Asr: 1 Mithl</button></div>';
+if(now.getDay()==5)h+='<div class="nx" style="margin-top:18px"><small>FRIDAY</small><p class="fr">Jumu‘ah jamā‘ah '+f12(T.zuhr[1])+'. The khutbah starts about 30 minutes before.</p><p class="fr">Golden hour from '+f12(T.maghrib[0]-60)+' until Maghrib. Make dua.</p><p class="fr">Read Surah al-Kahf today.</p></div>';
+return h+'<p class="mut"><a class="lk" href="https://www.eastlondonmosque.org.uk" target="_blank" rel="noopener">ELM prayer times ↗</a></p><p class="mut">From the East London Mosque '+E.y+' timetable. Jamā‘ah times at the start and end of Ramadan depend on the moon sighting.</p>'}
+function sw(k,label,c,x){return'<label class="sw"><input type="checkbox" data-n="'+k+'"'+(c?" checked":"")+'><span>'+label+'</span>'+(x||"")+'</label>'}
+function nsec(){var on=N.on;return'<h2>NOTIFICATIONS</h2><div class="lc"><div class="quick"><button class="b on" data-p="ntog">'+(on?"Turn off":"Turn on notifications")+'</button><button class="b" data-p="ntest"'+(on?"":" hidden")+'>Send test</button><button class="b" data-p="nchk">Check</button></div>'+PR.map(function(p){return sw("p-"+p[0],p[1]+" prayer time",N.pr[p[0]])}).join("")+sw("gh","Golden hour on Fridays",N.gh)+sw("kf","Surah al-Kahf on Fridays",N.kf,'<input type="time" data-t="kt" value="'+N.kt+'">')+sw("mv","Motivation",N.mv,'<span class="tms">'+N.mt.map(function(t,i){return'<input type="time" data-t="mt'+i+'" value="'+t+'">'}).join("")+'</span>')+'<p class="nmsg">'+esc(msg)+'</p></div>'}
+function render(){$("prtop").innerHTML=top();$("prnot").innerHTML=nsec()}
+function events(){var out=[],now=Date.now(),d0=new Date();
+function add(d,min,ti,bo,g){var t=new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,min).getTime();if(t>now)out.push({t:t,ti:ti,bo:bo,g:g})}
+for(var i=0;i<10;i++){var d=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate()+i),T=day(d),fri=d.getDay()==5;
+if(T)PR.forEach(function(p){if(N.pr[p[0]]){var x=T[p[0]];add(d,x[0],p[1]+" · "+f12(x[0]),(fri&&p[0]=="zuhr"?"Jumu‘ah jamā‘ah ":"Jamā‘ah ")+f12(x[1]),"p-"+p[0])}});
+if(fri&&N.kf)add(d,hm(N.kt),"Surah al-Kahf","It’s Friday. Read it today.","kf");
+if(fri&&N.gh&&T)add(d,T.maghrib[0]-60,"Golden hour","The last hour before Maghrib on Friday. Make dua.","gh");
+if(N.mv)N.mt.forEach(function(t,j){var q=BANK[Math.floor(Math.random()*BANK.length)];add(d,hm(t),q[0],q[1],"m"+j)})}
+return out.sort(function(a,b){return a.t-b.t})}
+function u8(s){var p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+function post(p,b){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)})}
+async function getSub(){var reg=await navigator.serviceWorker.ready;return reg.pushManager.getSubscription()}
+function sig(){return JSON.stringify([N.pr,N.gh,N.kf,N.kt,N.mv,N.mt,N.ms])}
+async function sync(force){if(!N.on||!ok)return false;try{var s=await getSub();if(!s)return false;var g=sig(),t=+localStorage.getItem("nt-ts")||0;
+if(!force&&g===localStorage.getItem("nt-sig")&&Date.now()-t<6*36e5)return true;
+var r=await post("/subscribe",{sub:s.toJSON(),events:events(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone});if(!r.ok)return false;
+localStorage.setItem("nt-sig",g);localStorage.setItem("nt-ts",String(Date.now()));return true}catch(e){return false}}
+async function turnOn(){if(!ok){msg="Add your Worker address in config.js first.";render();return}
+if(!("PushManager" in window)){msg="Open the app from its Home Screen icon first (Share, then Add to Home Screen).";render();return}
+try{var p=await Notification.requestPermission();if(p!=="granted"){msg="Notifications are blocked. Allow them in iPhone Settings.";render();return}
+var reg=await navigator.serviceWorker.ready,key=(await(await fetch(API+"/key")).text()).trim();
+if(!(await reg.pushManager.getSubscription()))await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(key)});
+N.on=1;sv();msg=(await sync(true))?"Notifications are on.":"Subscribed, but your Worker did not accept the schedule. Paste the latest worker.js and try again."}catch(e){msg="Could not turn on notifications: "+e.message}render()}
+async function turnOff(){try{var s=await getSub();if(s){await post("/unsubscribe",{sub:s.toJSON()});await s.unsubscribe()}}catch(e){}N.on=0;sv();msg="Notifications are off.";render()}
+async function test(){try{var s=await getSub();if(!s){msg="Not subscribed yet. Tap Turn on notifications.";render();return}var r=await post("/test",{sub:s.toJSON()}),t=await r.text(),j={};try{j=JSON.parse(t)}catch(e){j={status:t}}
+msg=j.status==201||j.status==200?"Test sent. It should arrive within a few seconds.":"Test failed. The push service replied "+j.status+(j.body?": "+j.body:"")+". Please tell me this message."}catch(e){msg="Test failed: "+e.message}render()}
+async function check(){var L=[];L.push("Home Screen app: "+((navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches))?"yes":"no, open it from the Home Screen icon"));
+L.push("Notifications: "+("Notification" in window?Notification.permission:"not available here"));
+if(!ok)L.push("Worker address: missing, edit config.js");else{try{var r=await fetch(API+"/health"),t=await r.text(),j=null;try{j=JSON.parse(t)}catch(e){}
+if(!j)L.push("Worker replied: "+t.slice(0,60).replace(/\s+/g," "));else{L.push("Worker: reachable, "+j.subs+" device(s) subscribed");L.push("Timer last ran: "+(j.cron?new Date(j.cron).toLocaleString():"never, add the cron trigger"));L.push("Last send: "+(j.last?j.last.sent+" sent, replies "+j.last.codes.join(",")+" at "+new Date(j.last.t).toLocaleTimeString():"none yet"))}}catch(e){L.push("Worker: unreachable, check the address")}}
+try{L.push("This device subscribed: "+(await getSub()?"yes":"no"))}catch(e){L.push("This device subscribed: unknown")}
+var ev=events();L.push("Scheduled: "+ev.length+" notifications"+(ev[0]?", next "+ev[0].ti+" at "+new Date(ev[0].t).toLocaleString([],{weekday:"short",hour:"numeric",minute:"2-digit"}):""));msg=L.join("\n");render()}
+var pr=$("pr");
+pr.addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(!b)return;var a=b.dataset.p;
+if(a=="ms1"||a=="ms2"){N.ms=a=="ms1"?1:2;sv();render();if(N.on)sync(true)}else if(a=="ntog")(N.on?turnOff:turnOn)();else if(a=="ntest")test();else if(a=="nchk")check()});
+pr.addEventListener("change",function(e){var t=e.target,n=t.dataset.n,q=t.dataset.t;
+if(n){if(n.indexOf("p-")==0)N.pr[n.slice(2)]=t.checked?1:0;else N[n]=t.checked?1:0}else if(q){if(q=="kt")N.kt=t.value||N.kt;else{var i=+q.slice(2);N.mt[i]=t.value||N.mt[i]}}else return;
+sv();if(N.on)sync(true)});
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
+$("pdate").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"});
+setInterval(function(){if(!pr.hidden)$("prtop").innerHTML=top()},30000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden){sync(false);if(!pr.hidden)$("prtop").innerHTML=top()}});
+setTimeout(function(){sync(false)},3000);
+window.prRefresh=render;window.prEvents=events;render();
+})();</script>
+<script>(function(){
 var DQ=["What went well today?","What was hard, and why?","What will I do better tomorrow?"];
 function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
 var R=ld("reflect-v1",{});R.qs=R.qs&&R.qs.length?R.qs:DQ.slice();R.ans=R.ans||{};
@@ -509,7 +581,7 @@ document.getElementById("rdate").textContent=new Date().toLocaleDateString(undef
 window.rfRefresh=render;window.rfDot=dot;mir();render();
 })();</script>
 <script>(function(){
-var KEYS=["habits-v2","habitlog-v2","hifz-v3","reflect-v1","weekly-v1"],API=(window.WORKER_URL||"").trim().replace(/\/+$/,""),ok=API&&API.indexOf("PUT_YOUR")<0;
+var KEYS=["habits-v2","habitlog-v2","hifz-v3","reflect-v1","weekly-v1","notif-v2"],API=(window.WORKER_URL||"").trim().replace(/\/+$/,""),ok=API&&API.indexOf("PUT_YOUR")<0;
 function $(i){return document.getElementById(i)}
 function say(t){$("bs").textContent=t}
 function gi(k){try{return localStorage.getItem(k)}catch(e){return null}}
@@ -534,9 +606,9 @@ KEYS.forEach(function(k){if(s.data[k]!=null)localStorage.setItem(k,s.data[k])});
 document.addEventListener("visibilitychange",function(){if(document.hidden)push(false)});setInterval(function(){if(!document.hidden)push(false)},60000);setTimeout(function(){push(false)},4000);
 btns();stat();window.bkPush=push;
 })();</script>
-<script>(function(){var nav=document.getElementById("nav"),S={habits:document.getElementById("hb"),hifz:document.getElementById("hz"),reflect:document.getElementById("rf")};
+<script>(function(){var nav=document.getElementById("nav"),S={habits:document.getElementById("hb"),hifz:document.getElementById("hz"),prayer:document.getElementById("pr"),reflect:document.getElementById("rf")};
 function show(t){if(!S[t])t="habits";Object.keys(S).forEach(function(k){S[k].hidden=k!=t});[].forEach.call(nav.children,function(b){b.classList.toggle("on",b.dataset.t==t)});try{localStorage.setItem("apptab",t)}catch(e){}
-if(t=="habits"&&window.hbRefresh)window.hbRefresh();if(t=="hifz"&&window.hzRefresh)window.hzRefresh();if(t=="reflect"&&window.rfRefresh)window.rfRefresh();if(window.rfDot)window.rfDot();window.scrollTo(0,0);try{history.replaceState(null,"","#"+t)}catch(e){}}
+if(t=="habits"&&window.hbRefresh)window.hbRefresh();if(t=="hifz"&&window.hzRefresh)window.hzRefresh();if(t=="prayer"&&window.prRefresh)window.prRefresh();if(t=="reflect"&&window.rfRefresh)window.rfRefresh();if(window.rfDot)window.rfDot();window.scrollTo(0,0);try{history.replaceState(null,"","#"+t)}catch(e){}}
 nav.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.t)});
 var st=null;try{st=localStorage.getItem("apptab")}catch(e){}
 show(location.hash?location.hash.slice(1):st||"habits");
