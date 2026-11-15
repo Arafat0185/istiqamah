@@ -175,7 +175,11 @@ button:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
 #hz .cl{position:relative;overflow:hidden}
 #hz .cl i{position:absolute;left:0;right:0;bottom:0;background:#3b6f93}
 #hz .cl span{position:relative}
-#hz .cl.cur{outline:none;animation:none;box-shadow:0 0 0 1.5px #7fa6c4}
+#hz .cl.cur{outline:none;animation:none;box-shadow:none}
+#hz .cl.cur::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;border:1.5px solid #cfe6f7;border-radius:3px;pointer-events:none}
+#hz .ac{position:relative}
+#hz .ac.nx{outline:none;box-shadow:none}
+#hz .ac.nx::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;border:1.5px solid var(--ice);border-radius:3px;pointer-events:none}
 #hz .rv{position:relative;overflow:hidden}
 #hz .fin{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(14,40,28,.95);animation:fo .25s ease-out;z-index:2}
 #hz .fin svg{width:64px;height:64px;overflow:visible}
@@ -309,13 +313,14 @@ var QUOTES=[
 ];
 var DEFAULTS=[
 ["fajr","Fajr","Salah"],["dhuhr","Dhuhr","Salah"],["asr","Asr","Salah"],["maghrib","Maghrib","Salah"],["isha","Isha","Salah"],
-["tahajjud","Tahajjud","Night & Duha"],["duha","Duha","Night & Duha"],["witr","Witr","Night & Duha"],
+["tahajjud","Tahajjud","Night & Duha"],["duha","Duha","Night & Duha"],
 ["morning","Morning adhkaar","Remembrance"],["evening","Evening adhkaar","Remembrance"],["istighfar","Istighfar (100x)","Remembrance"],["sleep","Sleep adhkaar & Surah Mulk","Remembrance"],
-["quran","Daily Qur’an","Growth"],["ilm","Daily ilm","Growth"],["sadaqah","Sadaqah","Growth"]
+["quran","Daily Qur’an","Growth"],["ilm","Daily ilm","Growth"]
 ];
 var HKEY="habits-v2",LKEY="habitlog-v2";
 var habits=ld(HKEY,null),log=ld(LKEY,{}),editing=false,justDone=null;
 if(!habits)habits=DEFAULTS.map(function(a){return{id:a[0],name:a[1],g:a[2]}});
+else{var n0=habits.length;habits=habits.filter(function(h){return h.id!="witr"&&h.id!="sadaqah"});if(habits.length!=n0)sv()}
 function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
 function sv(){try{localStorage.setItem(HKEY,JSON.stringify(habits));localStorage.setItem(LKEY,JSON.stringify(log))}catch(e){}mirror()}
 function key(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
@@ -362,7 +367,7 @@ document.getElementById("in").onkeydown=function(e){if(e.key==="Enter")add()};
 document.getElementById("edit").onclick=function(){editing=!editing;render()};
 function mirror(){}
 render();
-;window.hbRefresh=function(){log=ld(LKEY,{});habits=ld(HKEY,habits);render()};
+;window.hbRefresh=function(){log=ld(LKEY,{});habits=ld(HKEY,habits).filter(function(h){return h.id!="witr"&&h.id!="sadaqah"});render()};
 })();</script>
 <script>(function(){
 
@@ -431,7 +436,7 @@ h+='</div><h2>REVISE</h2>';
 if(!rs)h+='<p class="mut">Nothing to revise yet.</p>';else h+='<div class="lc rv'+(RA?" slide":"")+'"><p class="nm">'+esc(NAMES[rs-1])+'</p><small>Ayat 1–'+mem(rs)+' · '+(i+1)+' of '+L.length+' · Round '+D.rr+'</small><div class="rs">'+L.map(function(x,k){return'<i class="'+(k<i?"on":k==i?"cur":"")+'"></i>'}).join("")+'</div><div class="quick"><button class="b on big" data-a="rd">Done</button></div></div><p class="mut">Revised today: '+(D.rev[TD]||0)+'</p><div class="set"><label>Jump to<select data-a="rsel">'+opts(L.map(function(x){return[x,NAMES[x-1]]}),rs)+'</select></label></div>';
 h+='<p class="mut">This week: '+w0+' ayat'+(w0>w1?" · up "+(w0-w1)+" on last week":"")+'</p><p class="tip">'+esc(TIPS[Math.floor(T)%TIPS.length])+'</p><h2>DAILY GOAL</h2><div class="step"><button class="b" data-a="gm">−</button><b>'+g+'</b><span>'+(g==1?"ayah":"ayat")+' a day</span><button class="b" data-a="gp">+</button></div><small>Even one ayah keeps your streak going.</small>'+wCard()+'';
 return h}
-function sz(n){return n<=3?46:n<=6?34:n<=12?26:n<=20?22:18}
+function sz(n){return n<=3?44:n<=6?30:n<=12?24:n<=20?20:17}
 function vMap(){var full=0,h="";
 for(var j=29;j>=0;j--){var a=NJ[j],m=0,t=0;a.forEach(function(o){m+=segM(o);t+=o.tot});var done=m==t;if(done)full++;
 h+='<div class="jb'+(anim?" in":"")+(done?" full":"")+(CEL["j"+(j+1)]?" cel":"")+'" style="--i:'+(29-j)+';--c:'+sz(a.length)+'px"><div class="jh"><b>Juz '+(j+1)+'</b><span>'+(done?"✓":Math.round(m/t*100)+"%")+'</span></div><div class="cg">';
@@ -482,7 +487,7 @@ function $(i){return document.getElementById(i)}
 function p2(n){return("0"+n).slice(-2)}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function ld(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
-var DEF={on:0,pr:{fajr:1,zuhr:1,asr:1,maghrib:1,isha:1},gh:1,kf:1,kt:"09:00",mv:1,mt:["08:30","13:30","17:30"],ms:2};
+var DEF={on:0,pr:{fajr:1,zuhr:1,asr:1,maghrib:1,isha:1},du:0,tj:0,gh:1,kf:1,kt:"09:00",mv:1,mt:["08:30","13:30","17:30"],ms:2};
 var N=ld("notif-v2",{}),msg="";Object.keys(DEF).forEach(function(k){if(N[k]==null)N[k]=JSON.parse(JSON.stringify(DEF[k]))});
 function sv(){try{localStorage.setItem("notif-v2",JSON.stringify(N))}catch(e){}}
 var PR=[["fajr","Fajr"],["zuhr","Zuhr"],["asr","Asr"],["maghrib","Maghrib"],["isha","Isha"]],ORD=[["fajr","Fajr"],["sunrise","Sunrise"],["zuhr","Zuhr"],["asr","Asr"],["maghrib","Maghrib"],["isha","Isha"]];
@@ -494,20 +499,26 @@ function at(d,m){return new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,m)}
 function seq(d){var T=day(d),o=[];if(!T)return o;ORD.forEach(function(p){var x=T[p[0]];o.push({k:p[0],n:p[1],t:at(d,x[0]),b:x[0],j:x[1]})});return o}
 function cd(ms){var m=Math.max(0,Math.round(ms/60000)),h=Math.floor(m/60);return h?h+"h "+(m%60)+"m":m+"m"}
 function state(){var n=new Date(),y=new Date(n.getFullYear(),n.getMonth(),n.getDate()-1),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),prev=null,next=null;seq(y).concat(seq(n),seq(t)).forEach(function(e){if(e.t<=n)prev=e;else if(!next)next=e});return{now:n,prev:prev,next:next}}
+function tjAt(now,T){var y=new Date(now.getFullYear(),now.getMonth(),now.getDate()-1),t=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1),Y=day(y),Tm=day(t),a,b;
+if(now<at(now,T.fajr[0])&&Y){a=at(y,Y.maghrib[0]);b=at(now,T.fajr[0])}else{a=at(now,T.maghrib[0]);b=Tm?at(t,Tm.fajr[0]):at(t,T.fajr[0])}
+return new Date(a.getTime()+(b-a)*2/3)}
+function extras(now,T){var tj=tjAt(now,T);return'<table><tr><th>OTHER TIMES</th><th></th></tr><tr><td>Duha starts</td><td>'+f12(T.sunrise[0]+20)+'</td></tr><tr><td>Tahajjud starts</td><td>'+f12(tj.getHours()*60+tj.getMinutes())+'</td></tr></table><p class="mut" style="margin-top:6px">Duha is 20 minutes after sunrise. Tahajjud is the last third of the night.</p>'}
 function top(){var now=new Date(),T=day(now),S=state(),h="";
 if(!T)return'<p class="mut">The timetable file only covers '+E.y+'. Times for today are not loaded yet.</p>';
-if(S.next){var nx=S.next,pct=S.prev?Math.min(100,Math.max(0,(now-S.prev.t)/(nx.t-S.prev.t)*100)):0;h+='<div class="nx"><small>NEXT</small><b>'+nx.n+'</b><span class="cd">in '+cd(nx.t-now)+'</span><div class="bar2"><i style="width:'+pct.toFixed(1)+'%"></i></div><small>'+f12(nx.b)+(nx.j?" · Jamā‘ah "+f12(nx.j):"")+'</small></div>'}
-h+='<table><tr><th></th><th>BEGINS</th><th>JAMĀ‘AH</th></tr>'+ORD.map(function(p){var x=T[p[0]],cur=S.prev&&S.prev.k==p[0]&&S.prev.t.toDateString()==now.toDateString(),cls=cur?"cur":at(now,x[0])<=now?"past":"";return'<tr class="'+cls+'"><td>'+p[1]+'</td><td>'+f12(x[0])+'</td><td>'+(x[1]?f12(x[1]):"")+'</td></tr>'}).join("")+'</table>';
-h+='<div class="quick" style="margin:12px 0 4px"><button class="b'+(N.ms==2?" on":"")+'" data-p="ms2">Asr: 2 Mithl</button><button class="b'+(N.ms==1?" on":"")+'" data-p="ms1">Asr: 1 Mithl</button></div>';
-if(now.getDay()==5)h+='<div class="nx" style="margin-top:18px"><small>FRIDAY</small><p class="fr">Jumu‘ah jamā‘ah '+f12(T.zuhr[1])+'. The khutbah starts about 30 minutes before.</p><p class="fr">Golden hour from '+f12(T.maghrib[0]-60)+' until Maghrib. Make dua.</p><p class="fr">Read Surah al-Kahf today.</p></div>';
-return h+'<p class="mut"><a class="lk" href="https://www.eastlondonmosque.org.uk" target="_blank" rel="noopener">ELM prayer times ↗</a></p><p class="mut">From the East London Mosque '+E.y+' timetable. Jamā‘ah times at the start and end of Ramadan depend on the moon sighting.</p>'}
+if(S.next){var nx=S.next,pct=S.prev?Math.min(100,Math.max(0,(now-S.prev.t)/(nx.t-S.prev.t)*100)):0;h+='<div class="nx"><small>NEXT</small><b>'+nx.n+'</b><span class="cd">in '+cd(nx.t-now)+'</span><div class="bar2"><i style="width:'+pct.toFixed(1)+'%"></i></div><small>'+f12(nx.b)+'</small></div>'}
+h+='<table><tr><th></th><th>BEGINS</th></tr>'+ORD.map(function(p){var x=T[p[0]],cur=S.prev&&S.prev.k==p[0]&&S.prev.t.toDateString()==now.toDateString(),cls=cur?"cur":at(now,x[0])<=now?"past":"";return'<tr class="'+cls+'"><td>'+p[1]+'</td><td>'+f12(x[0])+'</td></tr>'}).join("")+'</table>';
+h+=extras(now,T);h+='<div class="quick" style="margin:12px 0 4px"><button class="b'+(N.ms==2?" on":"")+'" data-p="ms2">Asr: 2 Mithl</button><button class="b'+(N.ms==1?" on":"")+'" data-p="ms1">Asr: 1 Mithl</button></div>';
+if(now.getDay()==5)h+='<div class="nx" style="margin-top:18px"><small>FRIDAY</small><p class="fr">It’s Jumu‘ah today.</p><p class="fr">Golden hour from '+f12(T.maghrib[0]-60)+' until Maghrib. Make dua.</p><p class="fr">Read Surah al-Kahf today.</p></div>';
+return h+'<p class="mut"><a class="lk" href="https://www.eastlondonmosque.org.uk" target="_blank" rel="noopener">ELM prayer times ↗</a></p><p class="mut">Start times from the East London Mosque '+E.y+' timetable.</p>'}
 function sw(k,label,c,x){return'<label class="sw"><input type="checkbox" data-n="'+k+'"'+(c?" checked":"")+'><span>'+label+'</span>'+(x||"")+'</label>'}
-function nsec(){var on=N.on;return'<h2>NOTIFICATIONS</h2><div class="lc"><div class="quick"><button class="b on" data-p="ntog">'+(on?"Turn off":"Turn on notifications")+'</button><button class="b" data-p="ntest"'+(on?"":" hidden")+'>Send test</button><button class="b" data-p="nchk">Check</button></div>'+PR.map(function(p){return sw("p-"+p[0],p[1]+" prayer time",N.pr[p[0]])}).join("")+sw("gh","Golden hour on Fridays",N.gh)+sw("kf","Surah al-Kahf on Fridays",N.kf,'<input type="time" data-t="kt" value="'+N.kt+'">')+sw("mv","Motivation",N.mv,'<span class="tms">'+N.mt.map(function(t,i){return'<input type="time" data-t="mt'+i+'" value="'+t+'">'}).join("")+'</span>')+'<p class="nmsg">'+esc(msg)+'</p></div>'}
+function nsec(){var on=N.on;return'<h2>NOTIFICATIONS</h2><div class="lc"><div class="quick"><button class="b on" data-p="ntog">'+(on?"Turn off":"Turn on notifications")+'</button><button class="b" data-p="ntest"'+(on?"":" hidden")+'>Send test</button><button class="b" data-p="nchk">Check</button></div>'+PR.map(function(p){return sw("p-"+p[0],p[1]+" prayer time",N.pr[p[0]])}).join("")+sw("du","Duha time",N.du)+sw("tj","Tahajjud time (last third of the night)",N.tj)+sw("gh","Golden hour on Fridays",N.gh)+sw("kf","Surah al-Kahf on Fridays",N.kf,'<input type="time" data-t="kt" value="'+N.kt+'">')+sw("mv","Motivation",N.mv,'<span class="tms">'+N.mt.map(function(t,i){return'<input type="time" data-t="mt'+i+'" value="'+t+'">'}).join("")+'</span>')+'<p class="nmsg">'+esc(msg)+'</p></div>'}
 function render(){$("prtop").innerHTML=top();$("prnot").innerHTML=nsec()}
 function events(){var out=[],now=Date.now(),d0=new Date();
 function add(d,min,ti,bo,g){var t=new Date(d.getFullYear(),d.getMonth(),d.getDate(),0,min).getTime();if(t>now)out.push({t:t,ti:ti,bo:bo,g:g})}
 for(var i=0;i<10;i++){var d=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate()+i),T=day(d),fri=d.getDay()==5;
-if(T)PR.forEach(function(p){if(N.pr[p[0]]){var x=T[p[0]];add(d,x[0],p[1]+" · "+f12(x[0]),(fri&&p[0]=="zuhr"?"Jumu‘ah jamā‘ah ":"Jamā‘ah ")+f12(x[1]),"p-"+p[0])}});
+if(T)PR.forEach(function(p){if(N.pr[p[0]]){var x=T[p[0]];add(d,x[0],p[1]+" · "+f12(x[0]),fri&&p[0]=="zuhr"?"It’s Jumu‘ah today.":"Time for "+p[1]+".","p-"+p[0])}});
+if(N.du&&T)add(d,T.sunrise[0]+20,"Duha time","Duha prayer has started.","du");
+if(N.tj&&T){var nd=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1),T2=day(nd);if(T2){var ta=at(d,T.maghrib[0]).getTime(),tb=at(nd,T2.fajr[0]).getTime();add(d,Math.round((ta+(tb-ta)*2/3-at(d,0).getTime())/60000),"Tahajjud time","The last third of the night has started.","tj")}}
 if(fri&&N.kf)add(d,hm(N.kt),"Surah al-Kahf","It’s Friday. Read it today.","kf");
 if(fri&&N.gh&&T)add(d,T.maghrib[0]-60,"Golden hour","The last hour before Maghrib on Friday. Make dua.","gh");
 if(N.mv)N.mt.forEach(function(t,j){var q=BANK[Math.floor(Math.random()*BANK.length)];add(d,hm(t),q[0],q[1],"m"+j)})}
@@ -515,7 +526,7 @@ return out.sort(function(a,b){return a.t-b.t})}
 function u8(s){var p="=".repeat((4-s.length%4)%4),r=atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
 function post(p,b){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)})}
 async function getSub(){var reg=await navigator.serviceWorker.ready;return reg.pushManager.getSubscription()}
-function sig(){return JSON.stringify([N.pr,N.gh,N.kf,N.kt,N.mv,N.mt,N.ms])}
+function sig(){return JSON.stringify(["v3",N.du,N.tj,N.pr,N.gh,N.kf,N.kt,N.mv,N.mt,N.ms])}
 async function sync(force){if(!N.on||!ok)return false;try{var s=await getSub();if(!s)return false;var g=sig(),t=+localStorage.getItem("nt-ts")||0;
 if(!force&&g===localStorage.getItem("nt-sig")&&Date.now()-t<6*36e5)return true;
 var r=await post("/subscribe",{sub:s.toJSON(),events:events(),tz:Intl.DateTimeFormat().resolvedOptions().timeZone});if(!r.ok)return false;
